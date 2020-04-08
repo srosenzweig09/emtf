@@ -4,11 +4,14 @@
 #include "L1Trigger/L1TMuonEndCap/interface/Common.h"
 
 class PtAssignmentEngine;
+class PtAssignmentEngineDxy;
 class PtAssignmentEngineAux;
+class PtAssignmentEngineDxyAux;
 
 class PtAssignment {
 public:
   void configure(PtAssignmentEngine* pt_assign_engine,
+                 PtAssignmentEngineDxy* pt_assign_engine_dxy,
                  int verbose,
                  int endcap,
                  int sector,
@@ -26,8 +29,12 @@ public:
 
   const PtAssignmentEngineAux& aux() const;
 
+  const PtAssignmentEngineDxyAux& aux_dxy() const;
+
 private:
   PtAssignmentEngine* pt_assign_engine_;
+
+  PtAssignmentEngineDxy* pt_assign_engine_dxy_;
 
   int verbose_, endcap_, sector_, bx_;
 

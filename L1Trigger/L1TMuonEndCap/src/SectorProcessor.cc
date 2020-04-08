@@ -8,6 +8,7 @@ void SectorProcessor::configure(const GeometryTranslator* tp_geom,
                                 const ConditionHelper* cond,
                                 const SectorProcessorLUT* lut,
                                 PtAssignmentEngine* pt_assign_engine,
+                                PtAssignmentEngineDxy* pt_assign_engine_dxy,
                                 int verbose,
                                 int endcap,
                                 int sector,
@@ -74,11 +75,16 @@ void SectorProcessor::configure(const GeometryTranslator* tp_geom,
     edm::LogError("L1T") << "pt_assign_engine = nullptr";
     return;
   }
+  if (not(pt_assign_engine_dxy != nullptr)) {
+    edm::LogError("L1T") << "pt_assign_engine_dxy = nullptr";
+    return;
+  }
 
   tp_geom_ = tp_geom;
   cond_ = cond;
   lut_ = lut;
   pt_assign_engine_ = pt_assign_engine;
+  pt_assign_engine_dxy_ = pt_assign_engine_dxy;
 
   verbose_ = verbose;
   endcap_ = endcap;
@@ -521,6 +527,7 @@ void SectorProcessor::process_single_bx(int bx,
 
   PtAssignment pt_assign;
   pt_assign.configure(pt_assign_engine_,
+                      pt_assign_engine_dxy_,
                       verbose_,
                       endcap_,
                       sector_,

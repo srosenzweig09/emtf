@@ -15,6 +15,7 @@
 #include "L1Trigger/L1TMuonEndCap/interface/PtAssignmentEngine.h"
 #include "L1Trigger/L1TMuonEndCap/interface/PtAssignmentEngine2016.h"
 #include "L1Trigger/L1TMuonEndCap/interface/PtAssignmentEngine2017.h"
+#include "L1Trigger/L1TMuonEndCap/interface/PtAssignmentEngineDxy.h"
 
 #include "L1Trigger/L1TMuonEndCap/interface/PrimitiveSelection.h"
 #include "L1Trigger/L1TMuonEndCap/interface/PrimitiveConversion.h"
@@ -37,6 +38,7 @@ public:
                  const ConditionHelper* cond,
                  const SectorProcessorLUT* lut,
                  PtAssignmentEngine* pt_assign_engine,
+                 PtAssignmentEngineDxy* pt_assign_engine_dxy,
                  int verbose,
                  int endcap,
                  int sector,
@@ -108,6 +110,8 @@ private:
   const SectorProcessorLUT* lut_;
 
   PtAssignmentEngine* pt_assign_engine_;
+  
+  PtAssignmentEngineDxy* pt_assign_engine_dxy_;
 
   int verbose_, endcap_, sector_;
 

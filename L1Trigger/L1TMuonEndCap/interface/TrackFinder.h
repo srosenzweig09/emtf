@@ -35,6 +35,8 @@ private:
 
   std::unique_ptr<PtAssignmentEngine> pt_assign_engine_;
 
+  std::unique_ptr<PtAssignmentEngineDxy> pt_assign_engine_dxy_;
+
   emtf::sector_array<SectorProcessor> sector_processors_;
 
   const edm::ParameterSet config_;
