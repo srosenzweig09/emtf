@@ -88,9 +88,9 @@ void PtAssignmentEngineDxy::preprocessing_dxy(const EMTFTrack& track, emtf::Feat
       int32_t hit_lay = 99;
       if (hit.Station() == 1) {
         if (hit.Is_CSC()) {
-          if (hit.Ring() == 1) {
+          if (hit.Ring() == 1 || hit.Ring() == 4) {
             hit_lay = 0;            
-          } else if (hit.Ring() == 2) {
+          } else if (hit.Ring() == 2 || hit.Ring() == 3) {
             hit_lay = 1;
           }
         } else if (hit.Is_RPC()) {
@@ -299,9 +299,9 @@ void PtAssignmentEngineDxy::preprocessing_dxy(const EMTFTrack& track, emtf::Feat
       int32_t hit_lay = 99;
       if (hit.Station() == 1) {
         if (hit.Is_CSC()) {
-          if (hit.Ring() == 1) {
+          if (hit.Ring() == 1 || hit.Ring() == 4) {
             hit_lay = 0;            
-          } else if (hit.Ring() == 2) {
+          } else if (hit.Ring() == 2 || hit.Ring() == 3) {
             hit_lay = 1;
           }
         } else if (hit.Is_RPC()) {

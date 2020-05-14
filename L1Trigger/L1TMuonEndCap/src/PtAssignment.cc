@@ -112,8 +112,6 @@ void PtAssignment::process(EMTFTrackCollection& best_tracks) {
     prediction.fill(0);
 
     pt_assign_engine_dxy_->calculate_pt_dxy(track, feature, prediction);
-    // pt_dxy = pt + 1.0;
-    // dxy = rand() % 100;
 
     pt_dxy = aux_dxy().getTriggerPtDxy(prediction.at(0));
     dxy = prediction.at(1);
