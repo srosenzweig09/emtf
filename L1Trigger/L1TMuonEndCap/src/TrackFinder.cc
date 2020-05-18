@@ -10,6 +10,7 @@ TrackFinder::TrackFinder(const edm::ParameterSet& iConfig, edm::ConsumesCollecto
       condition_helper_(),
       sector_processor_lut_(),
       pt_assign_engine_(),
+      pt_assign_engine_dxy_(),
       sector_processors_(),
       config_(iConfig),
       tokenCSC_(iConsumes.consumes<CSCTag::digi_collection>(iConfig.getParameter<edm::InputTag>("CSCInput"))),
@@ -32,6 +33,8 @@ TrackFinder::TrackFinder(const edm::ParameterSet& iConfig, edm::ConsumesCollecto
     edm::LogError("L1T") << "era_ = " << era_;
     return;
   }
+
+  pt_assign_engine_dxy_.reset(new PtAssignmentEngineDxy());
 
   auto minBX = iConfig.getParameter<int>("MinBX");
   auto maxBX = iConfig.getParameter<int>("MaxBX");
@@ -89,6 +92,7 @@ TrackFinder::TrackFinder(const edm::ParameterSet& iConfig, edm::ConsumesCollecto
                                           &condition_helper_,
                                           &sector_processor_lut_,
                                           pt_assign_engine_.get(),
+                                          pt_assign_engine_dxy_.get(),
                                           verbose_,
                                           endcap,
                                           sector,
@@ -134,7 +138,9 @@ TrackFinder::TrackFinder(const edm::ParameterSet& iConfig, edm::ConsumesCollecto
 
 }  // End constructor: TrackFinder::TrackFinder()
 
-TrackFinder::~TrackFinder() {}
+TrackFinder::~TrackFinder() {
+  // pt_assign_engine_dxy_.get()->~PtAssignmentEngineDxy();
+}
 
 void TrackFinder::process(const edm::Event& iEvent,
                           const edm::EventSetup& iSetup,

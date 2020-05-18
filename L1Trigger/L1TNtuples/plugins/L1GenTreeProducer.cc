@@ -171,6 +171,9 @@ void L1GenTreeProducer::analyze(const edm::Event& iEvent, const edm::EventSetup&
         l1GenData_->partE.push_back(p.energy());
         l1GenData_->partParent.push_back(parentID);
         l1GenData_->partCh.push_back(p.charge());
+        l1GenData_->partVx.push_back(p.vx());
+        l1GenData_->partVy.push_back(p.vy());
+        l1GenData_->partVz.push_back(p.vz());
         ++nPart;
       }
     }
