@@ -12,10 +12,10 @@ PtAssignmentEngineDxy::PtAssignmentEngineDxy() {
   std::string cmssw_base_ = std::getenv("CMSSW_BASE");
 
 
-  pbFileNameDxy_ = "/src/L1Trigger/L1TMuonEndCap/data/emtfpp_tf_graphs/model_graph.displ.3.pb";
+  pbFileNameDxy_ = "/src/L1Trigger/L1TMuonEndCap/data/emtfpp_tf_graphs/model_graph.displ.4.pb";
   pbFileNameDxy_ = cmssw_base_ + pbFileNameDxy_;
   inputNameDxy_ = "batch_normalization_1_input";
-  outputNamesDxy_ = {"dense_5/BiasAdd"};
+  outputNamesDxy_ = {"dense_4/BiasAdd"};
 
   graphDefDxy_ = tensorflow::loadGraphDef(pbFileNameDxy_);
   assert(graphDefDxy_ != nullptr);
