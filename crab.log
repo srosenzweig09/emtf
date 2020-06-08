@@ -1,0 +1,752 @@
+# L1TReEmul sequence:  
+# simEcalTriggerPrimitiveDigis+simHcalTriggerPrimitiveDigis,simCaloStage2Layer1Digis,simCaloStage2Digis,simDtTriggerPrimitiveDigis,simCscTriggerPrimitiveDigis,simTwinMuxDigis,simBmtfDigis,simEmtfDigis,simOmtfDigis,simGmtCaloSumDigis,simGmtStage2Digis,simGtExtFakeStage2Digis,simGtStage2Digis
+# cms.Schedule(*[ process.raw2digi_step, process.endjob_step, process.L1TReEmulPath ], tasks=[process.patAlgosToolsTask])
+
+DEBUG 2020-06-04 17:15:00.071 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 17:15:00.072 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 17:15:00.392 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 17:15:00.392 UTC: 	 Executing command: 'submit'
+DEBUG 2020-06-04 17:15:00.392 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+INFO 2020-06-04 17:15:00.401 UTC: 	 Will use CRAB configuration file crab_cfg.py
+DEBUG 2020-06-04 17:15:00.401 UTC: 	 Loading CRAB configuration file.
+DEBUG 2020-06-04 17:15:00.464 UTC: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+DEBUG 2020-06-04 17:15:00.681 UTC: 	 Checking credentials
+DEBUG 2020-06-04 17:15:00.682 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 17:15:00.682 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 17:15:02.842 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 611500
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:04.380 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 611498
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:04.380 UTC: 	 Proxy lifetime 611500 secs is different from voms extension lifetime 611498 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 17:15:04.381 UTC: 	 Proxy valid for 169:51:38 hours
+DEBUG 2020-06-04 17:15:06.235 UTC: 	 Executing : 
+ command : env X509_USER_PROXY=/tmp/x509up_u126129 voms-proxy-info -fqan
+ output : /cms/Role=NULL/Capability=NULL
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:06.390 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 17:15:06.731 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:06.731 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:15:06.731 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 17:15:07.247 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:51:45  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:07.249 UTC: 	 Myproxy is valid: 2584305
+DEBUG 2020-06-04 17:15:07.249 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 17:15:07.249 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 17:15:11.810 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 17:15:11.817 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:15:11.817 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 17:15:12.125 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:51:46  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:15:12.126 UTC: 	 Myproxy is valid: 2584306
+DEBUG 2020-06-04 17:15:12.126 UTC: 	 Command use: submit
+DEBUG 2020-06-04 17:15:12.126 UTC: 	 Options use: ['-c', 'crab_cfg.py']
+DEBUG 2020-06-04 17:15:12.292 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 17:15:12.293 UTC: 	 Instance is prod
+DEBUG 2020-06-04 17:15:12.293 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 17:15:12.293 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 17:15:12.293 UTC: 	 Started submission
+DEBUG 2020-06-04 17:15:12.293 UTC: 	 Working on /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 17:15:13.019 UTC: 	 Loading required information from the environment
+DEBUG 2020-06-04 17:15:13.019 UTC: 	 Found CMSSW_11_0_2 for slc7_amd64_gcc820 with base /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2
+DEBUG 2020-06-04 17:15:13.019 UTC: 	 Loading required information from the environment
+DEBUG 2020-06-04 17:15:13.019 UTC: 	 Found CMSSW_11_0_2 for slc7_amd64_gcc820 with base /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2
+DEBUG 2020-06-04 17:15:13.020 UTC: 	 UNIQUE NAME: tarUUID 26329256-420e-410d-9f8a-f73d228ade6b 
+DEBUG 2020-06-04 17:15:13.020 UTC: 	 self.config: from WMCore.Configuration import Configuration
+config = Configuration()
+config.section_('General')
+config.General.transferLogs = False
+config.General.transferOutputs = True
+config.General.workArea = 'logs'
+config.General.requestName = 'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU'
+config.General.instance = 'prod'
+config.section_('JobType')
+config.JobType.psetName = '/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/l1NtupleMC_RAW2DIGI.py'
+config.JobType.pluginName = 'Analysis'
+config.JobType.outputFiles = ['L1Ntuple.root']
+config.section_('Data')
+config.Data.inputDataset = '/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW'
+config.Data.outputDatasetTag = 'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU'
+config.Data.totalUnits = 1000000
+config.Data.unitsPerJob = 1250
+config.Data.inputDBS = 'global'
+config.Data.splitting = 'Automatic'
+config.Data.useParent = False
+config.Data.outLFNDirBase = '/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/'
+config.Data.publication = False
+config.section_('Site')
+config.Site.storageSite = 'T3_US_FNALLPC'
+config.section_('User')
+config.section_('Debug')
+
+DEBUG 2020-06-04 17:15:13.020 UTC: 	 self.config.JobType.psetName: /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/l1NtupleMC_RAW2DIGI.py
+INFO 2020-06-04 17:15:13.020 UTC: 	 Importing CMSSW configuration /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/l1NtupleMC_RAW2DIGI.py
+INFO 2020-06-04 17:15:43.891 UTC: 	 Finished importing CMSSW configuration /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/l1NtupleMC_RAW2DIGI.py
+DEBUG 2020-06-04 17:15:43.891 UTC: 	 Writing CMSSW configuration to /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/inputs/PSet.py
+DEBUG 2020-06-04 17:15:44.679 UTC: 	 The following EDM output files will be collected: []
+DEBUG 2020-06-04 17:15:44.679 UTC: 	 The following TFile output files will be collected: ['L1Ntuple.root']
+DEBUG 2020-06-04 17:15:44.679 UTC: 	 The following user output files (not listed as PoolOuputModule or TFileService in the CMSSW PSet) will be collected: 
+DEBUG 2020-06-04 17:15:44.680 UTC: 	 Loading required information from the environment
+DEBUG 2020-06-04 17:15:44.680 UTC: 	 Found CMSSW_11_0_2 for slc7_amd64_gcc820 with base /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2
+DEBUG 2020-06-04 17:15:44.680 UTC: 	 Making tarball in /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/inputs/26329256-420e-410d-9f8a-f73d228ade6bdefault.tgz
+DEBUG 2020-06-04 17:15:44.690 UTC: 	 Checking directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/lib
+DEBUG 2020-06-04 17:15:44.690 UTC: 	 Adding directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/lib to tarball
+DEBUG 2020-06-04 17:16:16.367 UTC: 	 Checking directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/biglib
+DEBUG 2020-06-04 17:16:16.367 UTC: 	 Adding directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/biglib to tarball
+DEBUG 2020-06-04 17:16:24.220 UTC: 	 Checking directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/module
+DEBUG 2020-06-04 17:16:24.537 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Configuration/Skimming/interface to tarball
+DEBUG 2020-06-04 17:16:24.594 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DataFormats/L1TMuon/interface to tarball
+DEBUG 2020-06-04 17:16:24.958 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DataFormats/L1Trigger/interface to tarball
+DEBUG 2020-06-04 17:16:25.274 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DataFormats/HLTReco/interface to tarball
+DEBUG 2020-06-04 17:16:25.425 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DataFormats/MuonSeed/interface to tarball
+DEBUG 2020-06-04 17:16:25.546 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TCalorimeter/interface to tarball
+DEBUG 2020-06-04 17:16:26.387 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TCommon/interface to tarball
+DEBUG 2020-06-04 17:16:26.460 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuon/interface to tarball
+DEBUG 2020-06-04 17:16:26.946 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuon/data to tarball
+DEBUG 2020-06-04 17:16:56.988 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuonEndCap/interface to tarball
+DEBUG 2020-06-04 17:16:57.060 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuonEndCap/data to tarball
+DEBUG 2020-06-04 17:16:57.073 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TNtuples/interface to tarball
+DEBUG 2020-06-04 17:16:57.127 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/HardwareValidation/interface to tarball
+DEBUG 2020-06-04 17:16:57.176 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TGlobal/interface to tarball
+DEBUG 2020-06-04 17:16:57.239 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuonBarrel/interface to tarball
+DEBUG 2020-06-04 17:16:57.714 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/L1Trigger/L1TMuonCPPF/interface to tarball
+DEBUG 2020-06-04 17:16:57.755 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Calibration/HcalAlCaRecoProducers/interface to tarball
+DEBUG 2020-06-04 17:16:57.795 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Calibration/HcalCalibAlgos/data to tarball
+DEBUG 2020-06-04 17:16:58.394 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Calibration/HcalCalibAlgos/interface to tarball
+DEBUG 2020-06-04 17:16:58.407 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Calibration/HcalIsolatedTrackReco/interface to tarball
+DEBUG 2020-06-04 17:16:58.416 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Calibration/IsolatedParticles/interface to tarball
+DEBUG 2020-06-04 17:16:58.524 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/CaloOnlineTools/EcalTools/data to tarball
+DEBUG 2020-06-04 17:16:58.583 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/CaloOnlineTools/EcalTools/interface to tarball
+DEBUG 2020-06-04 17:16:58.605 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DPGAnalysis/Skims/data to tarball
+DEBUG 2020-06-04 17:16:58.611 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DPGAnalysis/Skims/interface to tarball
+DEBUG 2020-06-04 17:16:58.824 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DQM/L1TMonitor/interface to tarball
+DEBUG 2020-06-04 17:16:58.919 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DQM/Physics/interface to tarball
+DEBUG 2020-06-04 17:16:58.957 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DQMOffline/L1Trigger/interface to tarball
+DEBUG 2020-06-04 17:16:59.033 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DQMOffline/Trigger/data to tarball
+DEBUG 2020-06-04 17:16:59.052 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/DQMOffline/Trigger/interface to tarball
+DEBUG 2020-06-04 17:16:59.148 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/ElectroWeakAnalysis/WENu/interface to tarball
+DEBUG 2020-06-04 17:16:59.244 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/EventFilter/L1TRawToDigi/interface to tarball
+DEBUG 2020-06-04 17:16:59.271 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Geometry/HGCalGeometry/interface to tarball
+DEBUG 2020-06-04 17:16:59.299 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTrigger/HLTcore/interface to tarball
+DEBUG 2020-06-04 17:16:59.323 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTrigger/JetMET/interface to tarball
+DEBUG 2020-06-04 17:16:59.388 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/Egamma/interface to tarball
+DEBUG 2020-06-04 17:16:59.436 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/Higgs/data to tarball
+DEBUG 2020-06-04 17:16:59.443 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/Higgs/interface to tarball
+DEBUG 2020-06-04 17:16:59.479 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/JetMET/data to tarball
+DEBUG 2020-06-04 17:16:59.485 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/JetMET/interface to tarball
+DEBUG 2020-06-04 17:16:59.503 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/Muon/data to tarball
+DEBUG 2020-06-04 17:16:59.508 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/Muon/interface to tarball
+DEBUG 2020-06-04 17:16:59.526 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/SUSYBSM/data to tarball
+DEBUG 2020-06-04 17:16:59.530 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/HLTriggerOffline/SUSYBSM/interface to tarball
+DEBUG 2020-06-04 17:16:59.750 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/MuonAnalysis/MuonAssociators/interface to tarball
+DEBUG 2020-06-04 17:16:59.838 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/PhysicsTools/NanoAOD/interface to tarball
+DEBUG 2020-06-04 17:16:59.891 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/QCDAnalysis/UEAnalysis/interface to tarball
+DEBUG 2020-06-04 17:16:59.949 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/RecoMuon/L3TrackFinder/interface to tarball
+DEBUG 2020-06-04 17:17:00.019 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/RecoMuon/TrackerSeedGenerator/interface to tarball
+DEBUG 2020-06-04 17:17:00.131 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/RecoMuon/TrackingTools/interface to tarball
+DEBUG 2020-06-04 17:17:00.217 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/RecoTauTag/HLTProducers/interface to tarball
+DEBUG 2020-06-04 17:17:00.254 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/RecoTracker/DeDx/interface to tarball
+DEBUG 2020-06-04 17:17:00.272 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/SimG4CMS/Calo/data to tarball
+DEBUG 2020-06-04 17:17:00.285 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/SimG4CMS/Calo/interface to tarball
+DEBUG 2020-06-04 17:17:00.329 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Validation/HGCalValidation/data to tarball
+DEBUG 2020-06-04 17:17:00.333 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Validation/HGCalValidation/interface to tarball
+DEBUG 2020-06-04 17:17:00.363 UTC: 	 Adding data directory /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/Validation/L1T/interface to tarball
+DEBUG 2020-06-04 17:17:02.027 UTC: 	 Uploading archive /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/inputs/26329256-420e-410d-9f8a-f73d228ade6bdefault.tgz (40 MB) to the CRAB cache. Using URI https://cmsweb.cern.ch/crabcache
+DEBUG 2020-06-04 17:17:48.267 UTC: 	 Loading required information from the environment
+DEBUG 2020-06-04 17:17:48.268 UTC: 	 Found CMSSW_11_0_2 for slc7_amd64_gcc820 with base /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2
+DEBUG 2020-06-04 17:17:48.268 UTC: 	 Making tarball in /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/inputs/debugFiles.tgz
+DEBUG 2020-06-04 17:17:48.289 UTC: 	 Uploading archive /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/inputs/debugFiles.tgz (2 KB) to the CRAB cache. Using URI https://cmsweb.cern.ch/crabcache
+DEBUG 2020-06-04 17:17:48.401 UTC: 	 Result uploading input files: a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz 
+INFO 2020-06-04 17:17:48.402 UTC: 	 Sending the request to the server at cmsweb.cern.ch
+DEBUG 2020-06-04 17:17:48.402 UTC: 	 Submitting {'maxjobruntime': 1250, 'extrajdl': [], 'ignorelocality': 0, 'savelogsflag': 0, 'useparent': 0, 'asyncdest': 'T3_US_FNALLPC', 'algoargs': 1250, 'cachefilename': 'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', 'numcores': 1, 'addoutputfiles': [], 'generator': 'pythia', 'maxmemory': 2000, 'publishdbsurl': 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', 'priority': 10, 'jobsw': 'CMSSW_11_0_2', 'edmoutfiles': [], 'userfiles': [], 'primarydataset': '', 'inputdata': '/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', 'lfn': '/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', 'dryrun': 0, 'workflow': 'crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', 'cacheurl': u'https://cmsweb.cern.ch/crabcache', 'nonprodsw': 0, 'tfileoutfiles': ['L1Ntuple.root'], 'oneEventMode': 0, 'debugfilename': '53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', 'saveoutput': 1, 'publication': 0, 'jobarch': 'slc7_amd64_gcc820', 'totalunits': 1000000, 'splitalgo': 'Automatic', 'ignoreglobalblacklist': 0, 'nonvaliddata': 0, 'dbsurl': 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', 'publishgroupname': 0, 'jobtype': 'Analysis', 'publishname2': 'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU'} 
+DEBUG 2020-06-04 17:17:48.403 UTC: 	 Encoded submit request: maxjobruntime=1250&ignorelocality=0&savelogsflag=0&useparent=0&asyncdest=T3_US_FNALLPC&algoargs=1250&cachefilename=a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz&numcores=1&generator=pythia&maxmemory=2000&publishdbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fphys03%2FDBSWriter&priority=10&jobsw=CMSSW_11_0_2&primarydataset=&inputdata=%2FHTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8%2FRun3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2%2FGEN-SIM-RAW&lfn=%2Fstore%2Fuser%2Fsrosenzw%2Femtf%2FL1Ntuples%2FRun3%2FcrabOut%2F&dryrun=0&workflow=crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&cacheurl=https%3A%2F%2Fcmsweb.cern.ch%2Fcrabcache&nonprodsw=0&oneEventMode=0&debugfilename=53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz&saveoutput=1&publication=0&jobarch=slc7_amd64_gcc820&totalunits=1000000&splitalgo=Automatic&ignoreglobalblacklist=0&nonvaliddata=0&dbsurl=https%3A%2F%2Fcmsweb.cern.ch%2Fdbs%2Fprod%2Fglobal%2FDBSReader&publishgroupname=0&jobtype=Analysis&publishname2=L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU&tfileoutfiles=L1Ntuple.root
+DEBUG 2020-06-04 17:17:48.826 UTC: 	 Result: {u'result': [{u'RequestName': u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU'}]}
+INFO 2020-06-04 17:17:48.860 UTC: 	 Success: Your task has been delivered to the prod CRAB3 server.
+INFO 2020-06-04 17:17:48.860 UTC: 	 Task name: 200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:17:48.860 UTC: 	 Project dir: logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:17:48.861 UTC: 	 Please use ' crab status -d logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU ' to check how the submission process proceeds.
+DEBUG 2020-06-04 17:17:48.861 UTC: 	 About to return
+INFO 2020-06-04 17:17:48.866 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-04 17:18:05.237 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 17:18:05.238 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 17:18:05.319 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 17:18:05.319 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-04 17:18:05.320 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-04 17:18:05.399 UTC: 	 Checking credentials
+DEBUG 2020-06-04 17:18:05.400 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 17:18:05.400 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 17:18:07.124 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 611316
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:18:08.553 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 611314
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:18:08.553 UTC: 	 Proxy lifetime 611316 secs is different from voms extension lifetime 611314 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 17:18:08.553 UTC: 	 Proxy valid for 169:48:34 hours
+DEBUG 2020-06-04 17:18:08.674 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 17:18:08.896 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:18:08.896 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:18:08.897 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 17:18:09.614 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:48:43  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:18:09.615 UTC: 	 Myproxy is valid: 2584123
+DEBUG 2020-06-04 17:18:09.615 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 17:18:09.615 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 17:18:10.481 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 17:18:10.494 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:18:10.494 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 17:18:10.808 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:48:48  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:18:10.809 UTC: 	 Myproxy is valid: 2584128
+DEBUG 2020-06-04 17:18:10.809 UTC: 	 Command use: status
+DEBUG 2020-06-04 17:18:10.809 UTC: 	 Options use: []
+DEBUG 2020-06-04 17:18:10.960 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 17:18:10.960 UTC: 	 Instance is prod
+DEBUG 2020-06-04 17:18:10.960 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 17:18:10.960 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 17:18:11.108 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'NEW', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'None', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'None', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'None', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'None', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'None', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-04 17:18:11.109 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:18:11.109 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:18:11.109 UTC: 	 Grid scheduler - Task Worker:	N/A yet - N/A yet
+INFO 2020-06-04 17:18:11.109 UTC: 	 Status on the CRAB server:	NEW on command SUBMIT
+INFO 2020-06-04 17:18:11.109 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:18:11.213 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-04 17:18:11.213 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-04 17:18:11.213 UTC: 	 The task has not been submitted to the Grid scheduler yet. Not printing job information.
+INFO 2020-06-04 17:18:11.214 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-04 17:57:06.638 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 17:57:06.639 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 17:57:06.824 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 17:57:06.824 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-04 17:57:06.825 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-04 17:57:06.920 UTC: 	 Checking credentials
+DEBUG 2020-06-04 17:57:06.920 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 17:57:06.920 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 17:57:08.444 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 608974
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:57:09.664 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 608973
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:57:09.664 UTC: 	 Proxy lifetime 608974 secs is different from voms extension lifetime 608973 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 17:57:09.665 UTC: 	 Proxy valid for 169:09:33 hours
+DEBUG 2020-06-04 17:57:09.840 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 17:57:10.053 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:57:10.053 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:57:10.054 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 17:57:10.968 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:09:42  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:57:10.969 UTC: 	 Myproxy is valid: 2581782
+DEBUG 2020-06-04 17:57:10.969 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 17:57:10.969 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 17:57:12.002 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 17:57:12.020 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 17:57:12.020 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 17:57:12.336 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 717:09:46  (29.9 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 17:57:12.337 UTC: 	 Myproxy is valid: 2581786
+DEBUG 2020-06-04 17:57:12.337 UTC: 	 Command use: status
+DEBUG 2020-06-04 17:57:12.337 UTC: 	 Options use: []
+DEBUG 2020-06-04 17:57:12.476 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 17:57:12.476 UTC: 	 Instance is prod
+DEBUG 2020-06-04 17:57:12.476 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 17:57:12.476 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 17:57:12.620 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'SUBMITTED', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'2020-06-04 17:18:54.280516', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'crab-prod-tw02', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'crab3@vocms0122.cern.ch', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'58279797', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-04 17:57:12.621 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:57:12.621 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:57:12.621 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0122.cern.ch - crab-prod-tw02
+INFO 2020-06-04 17:57:12.621 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2020-06-04 17:57:12.621 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 17:57:12.642 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-04 17:57:12.642 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-04 17:57:12.642 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 58279797)
+DEBUG 2020-06-04 17:57:12.642 UTC: 	 Webdir is located at http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 17:57:12.787 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 17:57:12.787 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/status_cache
+DEBUG 2020-06-04 17:57:12.850 UTC: 	 Got information from status cache file: {'0-4': {'Retries': 0, 'WallDurations': [0, 1299.0], 'StartTimes': [1591291501.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279801.0'], 'EndTimes': [1591292800.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1251944], 'TotalUserCpuTimeHistory': [842], 'SiteHistory': ['Unknown', 'T1_US_FNAL'], 'TotalSysCpuTimeHistory': [18]}, '0-5': {'Retries': 0, 'WallDurations': [8.0, 1116.0], 'StartTimes': [1591291522.0], 'SubmitTimes': [1591291154.0], 'JobIds': ['58279804.0'], 'EndTimes': [1591292638.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1273680], 'TotalUserCpuTimeHistory': [740], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [38]}, '0-1': {'Retries': 0, 'WallDurations': [8.0, 644.0], 'StartTimes': [1591291521.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279802.0'], 'EndTimes': [1591292165.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1272560], 'TotalUserCpuTimeHistory': [347], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [16]}, '0-2': {'Retries': 0, 'WallDurations': [9.0, 1063.0], 'StartTimes': [1591291490.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279803.0'], 'EndTimes': [1591292553.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1250988], 'TotalUserCpuTimeHistory': [598], 'SiteHistory': ['Unknown', 'T1_ES_PIC'], 'TotalSysCpuTimeHistory': [16]}, '0-3': {'Retries': 0, 'WallDurations': [8.0, 1374.0], 'StartTimes': [1591291626.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279800.0'], 'EndTimes': [1591293000.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1070520], 'TotalUserCpuTimeHistory': [268], 'SiteHistory': ['Unknown', 'T2_US_Vanderbilt'], 'TotalSysCpuTimeHistory': [19]}}
+INFO 2020-06-04 17:57:12.850 UTC: 	 Status on the scheduler:	SUBMITTED
+INFO 2020-06-04 17:57:12.850 UTC: 	 
+The job splitting of this task is 'Automatic', please refer to this FAQ for a description of the jobs status summary:
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#What_is_the_Automatic_splitting
+INFO 2020-06-04 17:57:12.851 UTC: 	 Probe stage log:		https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/AutomaticSplitting_Log0.txt
+INFO 2020-06-04 17:57:12.851 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2020-06-04 17:57:12.853 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-04 18:50:12.019 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 18:50:12.019 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 18:50:12.036 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 18:50:12.037 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-04 18:50:12.037 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-04 18:50:12.050 UTC: 	 Checking credentials
+DEBUG 2020-06-04 18:50:12.051 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 18:50:12.051 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 18:50:12.856 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 605790
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:50:13.463 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 605789
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:50:13.464 UTC: 	 Proxy lifetime 605790 secs is different from voms extension lifetime 605789 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 18:50:13.464 UTC: 	 Proxy valid for 168:16:29 hours
+DEBUG 2020-06-04 18:50:13.546 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 18:50:13.654 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:50:13.655 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 18:50:13.655 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 18:50:13.859 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 716:16:39  (29.8 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:50:13.860 UTC: 	 Myproxy is valid: 2578599
+DEBUG 2020-06-04 18:50:13.860 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 18:50:13.860 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 18:50:14.690 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 18:50:14.697 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 18:50:14.697 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 18:50:14.901 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 716:16:44  (29.8 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:50:14.902 UTC: 	 Myproxy is valid: 2578604
+DEBUG 2020-06-04 18:50:14.903 UTC: 	 Command use: status
+DEBUG 2020-06-04 18:50:14.903 UTC: 	 Options use: []
+DEBUG 2020-06-04 18:50:14.979 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 18:50:14.979 UTC: 	 Instance is prod
+DEBUG 2020-06-04 18:50:14.979 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 18:50:14.979 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 18:50:15.063 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'SUBMITTED', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'2020-06-04 17:18:54.280516', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'crab-prod-tw02', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'crab3@vocms0122.cern.ch', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'58279797', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-04 18:50:15.063 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:50:15.063 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:50:15.064 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0122.cern.ch - crab-prod-tw02
+INFO 2020-06-04 18:50:15.064 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2020-06-04 18:50:15.064 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:50:15.071 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-04 18:50:15.071 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-04 18:50:15.071 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 58279797)
+DEBUG 2020-06-04 18:50:15.071 UTC: 	 Webdir is located at http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 18:50:15.165 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 18:50:15.165 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/status_cache
+DEBUG 2020-06-04 18:50:15.221 UTC: 	 Got information from status cache file: {'0-4': {'Retries': 0, 'WallDurations': [0, 1299.0], 'StartTimes': [1591291501.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279801.0'], 'EndTimes': [1591292800.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1251944], 'TotalUserCpuTimeHistory': [842], 'SiteHistory': ['Unknown', 'T1_US_FNAL'], 'TotalSysCpuTimeHistory': [18]}, '0-5': {'Retries': 0, 'WallDurations': [8.0, 1116.0], 'StartTimes': [1591291522.0], 'SubmitTimes': [1591291154.0], 'JobIds': ['58279804.0'], 'EndTimes': [1591292638.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1273680], 'TotalUserCpuTimeHistory': [740], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [38]}, '0-1': {'Retries': 0, 'WallDurations': [8.0, 644.0], 'StartTimes': [1591291521.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279802.0'], 'EndTimes': [1591292165.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1272560], 'TotalUserCpuTimeHistory': [347], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [16]}, '0-2': {'Retries': 0, 'WallDurations': [9.0, 1063.0], 'StartTimes': [1591291490.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279803.0'], 'EndTimes': [1591292553.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1250988], 'TotalUserCpuTimeHistory': [598], 'SiteHistory': ['Unknown', 'T1_ES_PIC'], 'TotalSysCpuTimeHistory': [16]}, '0-3': {'Retries': 0, 'WallDurations': [8.0, 1374.0], 'StartTimes': [1591291626.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279800.0'], 'EndTimes': [1591293000.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1070520], 'TotalUserCpuTimeHistory': [268], 'SiteHistory': ['Unknown', 'T2_US_Vanderbilt'], 'TotalSysCpuTimeHistory': [19]}, '1': {'Retries': 0, 'WallDurations': [9.0, 930.0], 'StartTimes': [1591294158.0], 'SubmitTimes': [1591293574.0], 'JobIds': ['58281434.0'], 'EndTimes': [1591295088.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1254616], 'TotalUserCpuTimeHistory': [606], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [40]}, '3': {'Retries': 0, 'WallDurations': [9.0, 1365.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281435.0'], 'EndTimes': [1591295519.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1377424], 'TotalUserCpuTimeHistory': [915], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [35]}, '2': {'Retries': 0, 'WallDurations': [8.0, 1429.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281436.0'], 'EndTimes': [1591295583.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1307828], 'TotalUserCpuTimeHistory': [910], 'SiteHistory': ['Unknown', 'T2_US_Wisconsin'], 'TotalSysCpuTimeHistory': [41]}, '5': {'Retries': 0, 'WallDurations': [9.0, 2417.0], 'StartTimes': [1591294155.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281439.0'], 'EndTimes': [], 'Restarts': 0, 'RecordedSite': True, 'State': 'running', 'ResidentSetSize': [1525112], 'TotalUserCpuTimeHistory': [1368.0], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [91.0]}, '4': {'Retries': 0, 'WallDurations': [9.0, 2089.0], 'StartTimes': [1591294149.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281437.0'], 'EndTimes': [1591296238.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1613000], 'TotalUserCpuTimeHistory': [1423], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [53]}, '6': {'Retries': 0, 'WallDurations': [8.0, 1585.0], 'StartTimes': [1591294152.0], 'SubmitTimes': [1591293577.0], 'JobIds': ['58281440.0'], 'EndTimes': [1591295737.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1524572], 'TotalUserCpuTimeHistory': [1069], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [55]}}
+INFO 2020-06-04 18:50:15.221 UTC: 	 Status on the scheduler:	SUBMITTED
+INFO 2020-06-04 18:50:15.221 UTC: 	 
+The job splitting of this task is 'Automatic', please refer to this FAQ for a description of the jobs status summary:
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#What_is_the_Automatic_splitting
+INFO 2020-06-04 18:50:15.221 UTC: 	 
+Jobs status:                    running      		 16.7% (1/6)
+INFO 2020-06-04 18:50:15.221 UTC: 	 				transferring 		 83.3% (5/6)
+INFO 2020-06-04 18:50:15.221 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2020-06-04 18:50:15.222 UTC: 	 
+Warning: the max jobs runtime is less than 30% of the task requested value (1250 min), please consider to request a lower value for failed jobs (allowed through crab resubmit) and/or improve the jobs splitting (e.g. config.Data.splitting = 'Automatic') in a new task.
+INFO 2020-06-04 18:50:15.222 UTC: 	 
+Summary of run jobs:
+ * Memory: 1225MB min, 1575MB max, 1382MB ave
+ * Runtime: 0:10:44 min, 0:34:49 max, 0:24:39 ave
+ * CPU eff: 67% min, 71% max, 70% ave
+ * Waste: 0:00:43 (1% of total)
+
+INFO 2020-06-04 18:50:15.268 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-04 18:57:50.111 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 18:57:50.111 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 18:57:50.138 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 18:57:50.139 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-04 18:57:50.139 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-04 18:57:50.150 UTC: 	 Checking credentials
+DEBUG 2020-06-04 18:57:50.150 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 18:57:50.150 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 18:57:50.755 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 605332
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:57:51.461 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 605331
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:57:51.462 UTC: 	 Proxy lifetime 605332 secs is different from voms extension lifetime 605331 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 18:57:51.462 UTC: 	 Proxy valid for 168:08:51 hours
+DEBUG 2020-06-04 18:57:51.540 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 18:57:51.651 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:57:51.651 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 18:57:51.651 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 18:57:51.855 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 716:09:01  (29.8 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:57:51.856 UTC: 	 Myproxy is valid: 2578141
+DEBUG 2020-06-04 18:57:51.856 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 18:57:51.856 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 18:57:52.538 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 18:57:52.545 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 18:57:52.545 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 18:57:52.749 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 716:09:06  (29.8 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 18:57:52.749 UTC: 	 Myproxy is valid: 2578146
+DEBUG 2020-06-04 18:57:52.750 UTC: 	 Command use: status
+DEBUG 2020-06-04 18:57:52.750 UTC: 	 Options use: []
+DEBUG 2020-06-04 18:57:52.855 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 18:57:52.855 UTC: 	 Instance is prod
+DEBUG 2020-06-04 18:57:52.855 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 18:57:52.855 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 18:57:52.937 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'SUBMITTED', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'2020-06-04 17:18:54.280516', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'crab-prod-tw02', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'crab3@vocms0122.cern.ch', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'58279797', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-04 18:57:52.938 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:57:52.938 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:57:52.938 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0122.cern.ch - crab-prod-tw02
+INFO 2020-06-04 18:57:52.938 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2020-06-04 18:57:52.938 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 18:57:52.942 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-04 18:57:52.942 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-04 18:57:52.942 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 58279797)
+DEBUG 2020-06-04 18:57:52.942 UTC: 	 Webdir is located at http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 18:57:53.028 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 18:57:53.028 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/status_cache
+DEBUG 2020-06-04 18:57:53.080 UTC: 	 Got information from status cache file: {'0-4': {'Retries': 0, 'WallDurations': [0, 1299.0], 'StartTimes': [1591291501.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279801.0'], 'EndTimes': [1591292800.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1251944], 'TotalUserCpuTimeHistory': [842], 'SiteHistory': ['Unknown', 'T1_US_FNAL'], 'TotalSysCpuTimeHistory': [18]}, '0-5': {'Retries': 0, 'WallDurations': [8.0, 1116.0], 'StartTimes': [1591291522.0], 'SubmitTimes': [1591291154.0], 'JobIds': ['58279804.0'], 'EndTimes': [1591292638.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1273680], 'TotalUserCpuTimeHistory': [740], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [38]}, '0-1': {'Retries': 0, 'WallDurations': [8.0, 644.0], 'StartTimes': [1591291521.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279802.0'], 'EndTimes': [1591292165.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1272560], 'TotalUserCpuTimeHistory': [347], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [16]}, '0-2': {'Retries': 0, 'WallDurations': [9.0, 1063.0], 'StartTimes': [1591291490.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279803.0'], 'EndTimes': [1591292553.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1250988], 'TotalUserCpuTimeHistory': [598], 'SiteHistory': ['Unknown', 'T1_ES_PIC'], 'TotalSysCpuTimeHistory': [16]}, '0-3': {'Retries': 0, 'WallDurations': [8.0, 1374.0], 'StartTimes': [1591291626.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279800.0'], 'EndTimes': [1591293000.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1070520], 'TotalUserCpuTimeHistory': [268], 'SiteHistory': ['Unknown', 'T2_US_Vanderbilt'], 'TotalSysCpuTimeHistory': [19]}, '1': {'Retries': 0, 'WallDurations': [9.0, 930.0], 'StartTimes': [1591294158.0], 'SubmitTimes': [1591293574.0], 'JobIds': ['58281434.0'], 'EndTimes': [1591295088.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1254616], 'TotalUserCpuTimeHistory': [606], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [40]}, '3': {'Retries': 0, 'WallDurations': [9.0, 1365.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281435.0'], 'EndTimes': [1591295519.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1377424], 'TotalUserCpuTimeHistory': [915], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [35]}, '2': {'Retries': 0, 'WallDurations': [8.0, 1429.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281436.0'], 'EndTimes': [1591295583.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1307828], 'TotalUserCpuTimeHistory': [910], 'SiteHistory': ['Unknown', 'T2_US_Wisconsin'], 'TotalSysCpuTimeHistory': [41]}, '5': {'Retries': 0, 'WallDurations': [9.0, 2717.0], 'StartTimes': [1591294155.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281439.0'], 'EndTimes': [], 'Restarts': 0, 'RecordedSite': True, 'State': 'running', 'ResidentSetSize': [1593480], 'TotalUserCpuTimeHistory': [1549.0], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [102.0]}, '4': {'Retries': 0, 'WallDurations': [9.0, 2089.0], 'StartTimes': [1591294149.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281437.0'], 'EndTimes': [1591296238.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1613000], 'TotalUserCpuTimeHistory': [1423], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [53]}, '6': {'Retries': 0, 'WallDurations': [8.0, 1585.0], 'StartTimes': [1591294152.0], 'SubmitTimes': [1591293577.0], 'JobIds': ['58281440.0'], 'EndTimes': [1591295737.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'transferring', 'ResidentSetSize': [1524572], 'TotalUserCpuTimeHistory': [1069], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [55]}}
+INFO 2020-06-04 18:57:53.080 UTC: 	 Status on the scheduler:	SUBMITTED
+INFO 2020-06-04 18:57:53.080 UTC: 	 
+The job splitting of this task is 'Automatic', please refer to this FAQ for a description of the jobs status summary:
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#What_is_the_Automatic_splitting
+INFO 2020-06-04 18:57:53.081 UTC: 	 
+Jobs status:                    finished     		 16.7% (1/6)
+INFO 2020-06-04 18:57:53.081 UTC: 	 				running      		 16.7% (1/6)
+INFO 2020-06-04 18:57:53.081 UTC: 	 				transferring 		 66.7% (4/6)
+INFO 2020-06-04 18:57:53.081 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2020-06-04 18:57:53.082 UTC: 	 
+Warning: the max jobs runtime is less than 30% of the task requested value (1250 min), please consider to request a lower value for failed jobs (allowed through crab resubmit) and/or improve the jobs splitting (e.g. config.Data.splitting = 'Automatic') in a new task.
+INFO 2020-06-04 18:57:53.082 UTC: 	 
+Summary of run jobs:
+ * Memory: 1225MB min, 1575MB max, 1382MB ave
+ * Runtime: 0:10:44 min, 0:34:49 max, 0:24:39 ave
+ * CPU eff: 67% min, 71% max, 70% ave
+ * Waste: 0:00:43 (1% of total)
+
+INFO 2020-06-04 18:57:53.084 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-04 21:44:35.994 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-04 21:44:35.995 UTC: 	 Running on: Linux lxplus745.cern.ch 3.10.0-1127.el7.x86_64 #1 SMP Tue Mar 31 23:36:51 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-04 21:44:36.010 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-04 21:44:36.010 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-04 21:44:36.011 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-04 21:44:36.064 UTC: 	 Checking credentials
+DEBUG 2020-06-04 21:44:36.080 UTC: 	 Found proxy file /tmp/x509up_u126129
+DEBUG 2020-06-04 21:44:36.080 UTC: 	 Getting proxy life time left
+DEBUG 2020-06-04 21:44:36.785 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 595326
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 21:44:37.390 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 595325
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 21:44:37.390 UTC: 	 Proxy lifetime 595326 secs is different from voms extension lifetime 595325 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-04 21:44:37.390 UTC: 	 Proxy valid for 165:22:05 hours
+DEBUG 2020-06-04 21:44:37.475 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-04 21:44:37.584 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 21:44:37.585 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 21:44:37.585 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-04 21:44:37.789 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 713:22:15  (29.7 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 21:44:37.790 UTC: 	 Myproxy is valid: 2568135
+DEBUG 2020-06-04 21:44:37.790 UTC: 	 Retrieving username ...
+DEBUG 2020-06-04 21:44:37.790 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-04 21:44:38.505 UTC: 	 username is srosenzw
+DEBUG 2020-06-04 21:44:38.510 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-04 21:44:38.511 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-04 21:44:38.714 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 713:22:20  (29.7 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-04 21:44:38.714 UTC: 	 Myproxy is valid: 2568140
+DEBUG 2020-06-04 21:44:38.715 UTC: 	 Command use: status
+DEBUG 2020-06-04 21:44:38.715 UTC: 	 Options use: []
+DEBUG 2020-06-04 21:44:38.787 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-04 21:44:38.787 UTC: 	 Instance is prod
+DEBUG 2020-06-04 21:44:38.787 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-04 21:44:38.787 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-04 21:44:38.878 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'SUBMITTED', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'2020-06-04 17:18:54.280516', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'crab-prod-tw02', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'crab3@vocms0122.cern.ch', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'58279797', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-04 21:44:38.879 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 21:44:38.879 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 21:44:38.879 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0122.cern.ch - crab-prod-tw02
+INFO 2020-06-04 21:44:38.879 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2020-06-04 21:44:38.879 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-04 21:44:38.886 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-04 21:44:38.886 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-04 21:44:38.886 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 58279797)
+DEBUG 2020-06-04 21:44:38.886 UTC: 	 Webdir is located at http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 21:44:38.966 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-04 21:44:38.966 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/status_cache
+DEBUG 2020-06-04 21:44:39.018 UTC: 	 Got information from status cache file: {'0-4': {'Retries': 0, 'WallDurations': [0, 1299.0], 'StartTimes': [1591291501.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279801.0'], 'EndTimes': [1591292800.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1251944], 'TotalUserCpuTimeHistory': [842], 'SiteHistory': ['Unknown', 'T1_US_FNAL'], 'TotalSysCpuTimeHistory': [18]}, '0-5': {'Retries': 0, 'WallDurations': [8.0, 1116.0], 'StartTimes': [1591291522.0], 'SubmitTimes': [1591291154.0], 'JobIds': ['58279804.0'], 'EndTimes': [1591292638.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1273680], 'TotalUserCpuTimeHistory': [740], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [38]}, '0-1': {'Retries': 0, 'WallDurations': [8.0, 644.0], 'StartTimes': [1591291521.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279802.0'], 'EndTimes': [1591292165.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1272560], 'TotalUserCpuTimeHistory': [347], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [16]}, '0-2': {'Retries': 0, 'WallDurations': [9.0, 1063.0], 'StartTimes': [1591291490.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279803.0'], 'EndTimes': [1591292553.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1250988], 'TotalUserCpuTimeHistory': [598], 'SiteHistory': ['Unknown', 'T1_ES_PIC'], 'TotalSysCpuTimeHistory': [16]}, '0-3': {'Retries': 0, 'WallDurations': [8.0, 1374.0], 'StartTimes': [1591291626.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279800.0'], 'EndTimes': [1591293000.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1070520], 'TotalUserCpuTimeHistory': [268], 'SiteHistory': ['Unknown', 'T2_US_Vanderbilt'], 'TotalSysCpuTimeHistory': [19]}, '1': {'Retries': 0, 'WallDurations': [9.0, 930.0], 'StartTimes': [1591294158.0], 'SubmitTimes': [1591293574.0], 'JobIds': ['58281434.0'], 'EndTimes': [1591295088.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1254616], 'TotalUserCpuTimeHistory': [606], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [40]}, '3': {'Retries': 0, 'WallDurations': [9.0, 1365.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281435.0'], 'EndTimes': [1591295519.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1377424], 'TotalUserCpuTimeHistory': [915], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [35]}, '2': {'Retries': 0, 'WallDurations': [8.0, 1429.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281436.0'], 'EndTimes': [1591295583.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1307828], 'TotalUserCpuTimeHistory': [910], 'SiteHistory': ['Unknown', 'T2_US_Wisconsin'], 'TotalSysCpuTimeHistory': [41]}, '5': {'Retries': 0, 'WallDurations': [9.0, 3253.0], 'StartTimes': [1591294155.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281439.0'], 'EndTimes': [1591297408.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1699688], 'TotalUserCpuTimeHistory': [1909], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [126]}, '4': {'Retries': 0, 'WallDurations': [9.0, 2089.0], 'StartTimes': [1591294149.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281437.0'], 'EndTimes': [1591296238.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1613000], 'TotalUserCpuTimeHistory': [1423], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [53]}, '6': {'Retries': 0, 'WallDurations': [8.0, 1585.0], 'StartTimes': [1591294152.0], 'SubmitTimes': [1591293577.0], 'JobIds': ['58281440.0'], 'EndTimes': [1591295737.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1524572], 'TotalUserCpuTimeHistory': [1069], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [55]}}
+INFO 2020-06-04 21:44:39.018 UTC: 	 Status on the scheduler:	COMPLETED
+INFO 2020-06-04 21:44:39.019 UTC: 	 
+The job splitting of this task is 'Automatic', please refer to this FAQ for a description of the jobs status summary:
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#What_is_the_Automatic_splitting
+INFO 2020-06-04 21:44:39.019 UTC: 	 
+Jobs status:                    finished     		100.0% (6/6)
+INFO 2020-06-04 21:44:39.019 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2020-06-04 21:44:39.019 UTC: 	 
+Warning: the max jobs runtime is less than 30% of the task requested value (1250 min), please consider to request a lower value for failed jobs (allowed through crab resubmit) and/or improve the jobs splitting (e.g. config.Data.splitting = 'Automatic') in a new task.
+INFO 2020-06-04 21:44:39.019 UTC: 	 
+Summary of run jobs:
+ * Memory: 1225MB min, 1659MB max, 1429MB ave
+ * Runtime: 0:10:44 min, 0:54:13 max, 0:29:35 ave
+ * CPU eff: 63% min, 71% max, 67% ave
+ * Waste: 0:00:52 (0% of total)
+
+INFO 2020-06-04 21:44:39.037 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
+DEBUG 2020-06-08 15:20:16.455 UTC: 	 CRAB Client version: 3.3.2005
+DEBUG 2020-06-08 15:20:16.455 UTC: 	 Running on: Linux lxplus712.cern.ch 3.10.0-1127.8.2.el7.x86_64 #1 SMP Tue May 12 16:57:42 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux - CentOS Linux 7 (Core)
+DEBUG 2020-06-08 15:20:16.475 UTC: 	 OpenSSl version: OpenSSL 1.0.2k-fips  26 Jan 2017 (Library: OpenSSL 1.0.2d-fips 9 Jul 2015)
+DEBUG 2020-06-08 15:20:16.475 UTC: 	 Executing command: 'status'
+DEBUG 2020-06-08 15:20:16.476 UTC: 	 Found CRAB cache file /afs/cern.ch/user/s/srosenzw/.crab3
+DEBUG 2020-06-08 15:20:16.586 UTC: 	 Checking credentials
+DEBUG 2020-06-08 15:20:16.586 UTC: 	 Proxy file /tmp/x509up_u126129 not found
+DEBUG 2020-06-08 15:20:16.586 UTC: 	 Creating new proxy for 172:00 hours with VO group '' and VO role 'NULL'.
+DEBUG 2020-06-08 15:20:23.825 UTC: 	 Executing : 
+ command : voms-proxy-init -voms cms:/cms -valid 172:00 -rfc
+ output : None
+ error: None
+ retcode : 0
+DEBUG 2020-06-08 15:20:24.548 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -timeleft
+ output : 619198
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:25.155 UTC: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u126129 -actimeleft
+ output : 619197
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:25.156 UTC: 	 Proxy lifetime 619198 secs is different from voms extension lifetime 619197 secs for proxy: /tmp/x509up_u126129
+DEBUG 2020-06-08 15:20:25.861 UTC: 	 Executing : 
+ command : env X509_USER_PROXY=/tmp/x509up_u126129 voms-proxy-info -fqan
+ output : /cms/Role=NULL/Capability=NULL
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:25.862 UTC: 	 Proxy created.
+DEBUG 2020-06-08 15:20:26.144 UTC: 	 Registering user credentials for server /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+DEBUG 2020-06-08 15:20:26.254 UTC: 	 Executing : 
+ command : openssl x509 -in ~/.globus/usercert.pem -subject -noout
+ output : subject= /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:26.254 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-08 15:20:26.254 UTC: 	 Calculating hash of /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig_cmsweb.cern.ch for credential name
+DEBUG 2020-06-08 15:20:26.459 UTC: 	 Executing : 
+ command : myproxy-info -l e7caa868cfa6232bd769265417fd4d222ea0ac29 -s myproxy.cern.ch
+ output : username: e7caa868cfa6232bd769265417fd4d222ea0ac29
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 623:46:26  (26.0 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:26.460 UTC: 	 Myproxy is valid: 2245586
+DEBUG 2020-06-08 15:20:26.461 UTC: 	 Retrieving username ...
+DEBUG 2020-06-08 15:20:26.461 UTC: 	 Retrieving username from CRIC...
+DEBUG 2020-06-08 15:20:27.282 UTC: 	 username is srosenzw
+DEBUG 2020-06-08 15:20:27.291 UTC: 	 Getting myproxy life time left for myproxy.cern.ch
+DEBUG 2020-06-08 15:20:27.291 UTC: 	 using srosenzw_CRAB as credential login name
+DEBUG 2020-06-08 15:20:27.495 UTC: 	 Executing : 
+ command : myproxy-info -l srosenzw_CRAB -s myproxy.cern.ch
+ output : username: srosenzw_CRAB
+owner: /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig
+  renewal policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  trusted retrieval policy: /DC=ch/DC=cern/OU=computers/CN=vocms0105.cern.ch|/DC=ch/DC=cern/OU=computers/CN=crab-(preprod|prod|dev)-tw(02|01).cern.ch|/DC=ch/DC=cern/OU=computers/CN=(ddi|ddidk|mytw).cern.ch|/DC=ch/DC=cern/OU=computers/CN=stefanov(m|m2).cern.ch
+  timeleft: 623:46:31  (26.0 days)
+
+ error: 
+ retcode : 0
+DEBUG 2020-06-08 15:20:27.495 UTC: 	 Myproxy is valid: 2245591
+DEBUG 2020-06-08 15:20:27.496 UTC: 	 Command use: status
+DEBUG 2020-06-08 15:20:27.496 UTC: 	 Options use: []
+DEBUG 2020-06-08 15:20:27.594 UTC: 	 CRABClient version: 3.3.2005
+DEBUG 2020-06-08 15:20:27.594 UTC: 	 Instance is prod
+DEBUG 2020-06-08 15:20:27.594 UTC: 	 Server base url is cmsweb.cern.ch
+DEBUG 2020-06-08 15:20:27.594 UTC: 	 Command url /crabserver/prod/workflow
+DEBUG 2020-06-08 15:20:27.677 UTC: 	 Got information from server oracle database: {u'result': [u'200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'None', u'SUBMITTED', u'SUBMIT', u'2020-06-04 17:17:48.818937', u'None', u'2020-06-04 17:18:54.280516', u'None', u'CMSSW_11_0_2', u'slc7_amd64_gcc820', u'/HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8/Run3Winter20DRPremixMiniAOD-110X_mcRun3_2021_realistic_v6-v2/GEN-SIM-RAW', u'F', u'0', u'[]', u'[]', u'Automatic', u"{'splitOnRun': False, 'minutes_per_job': 1250, 'halt_job_on_file_boundaries': False, 'runs': [], 'lumis': []}", u'a5ae754e9bc16748bc2b9363bbe1f2663129d0c8f9efc5276a97a22ec9f4aad8.tar.gz', u'https://cmsweb.cern.ch/crabcache', u'srosenzw', u'/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=srosenzw/CN=821753/CN=Suzanne Renee Rosenzweig', u'cms', u'None', u'None', u'L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_crab_GEN_SIM_RAW_wEMU-00000000000000000000000000000000', u'F', u'T3_US_FNALLPC', u'https://cmsweb.cern.ch/dbs/prod/global/DBSReader', u'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter', u'F', u'[]', u"['L1Ntuple.root']", u'[]', u'Analysis', u'pythia', u'None', u'{}', u'[]', u'F', u'crab-prod-tw02', u'[]', u'1250', u'1', u'2000', u'10', u'None', u'[]', u'http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU', u'None', u'[]', u'[]', u'https://cmsweb.cern.ch/crabserver/prod', u'cmsgwms-collector-global.cern.ch:9620,cmsgwms-collector-global.fnal.gov', u'crab3@vocms0122.cern.ch', u'F', u'[]', u'T', u'/store/user/srosenzw/emtf/L1Ntuples/Run3/crabOut/', u'F', u'None', u'F', u'None', u'HTo2LongLivedTo4mu_MH-125_MFF-50_CTau-3000mm_TuneCP5_14TeV_pythia8', u'None', u'53815bdc5d45b871a62f5de73d2d974ff80799343aeace7247c29c14b53c62a8.tar.gz', u'58279797', u'filetransfers', u'F', u'2001:1458:d00:16::2e4', u'1000000.0', u'None'], u'desc': {u'columns': [u'tm_taskname', u'tm_activity', u'panda_jobset_id', u'tm_task_status', u'tm_task_command', u'tm_start_time', u'tm_start_injection', u'tm_end_injection', u'tm_task_failure', u'tm_job_sw', u'tm_job_arch', u'tm_input_dataset', u'tm_nonvalid_input_dataset', u'tm_use_parent', u'tm_site_whitelist', u'tm_site_blacklist', u'tm_split_algo', u'tm_split_args', u'tm_user_sandbox', u'tm_cache_url', u'tm_username', u'tm_user_dn', u'tm_user_vo', u'tm_user_role', u'tm_user_group', u'tm_publish_name', u'tm_publish_groupname', u'tm_asyncdest', u'tm_dbs_url', u'tm_publish_dbs_url', u'tm_publication', u'tm_outfiles', u'tm_tfile_outfiles', u'tm_edm_outfiles', u'tm_job_type', u'tm_generator', u'tm_events_per_lumi', u'tm_arguments', u'panda_resubmitted_jobs', u'tm_save_logs', u'tw_name', u'tm_user_infiles', u'tm_maxjobruntime', u'tm_numcores', u'tm_maxmemory', u'tm_priority', u'tm_output_dataset', u'tm_task_warnings', u'tm_user_webdir', u'tm_scriptexe', u'tm_scriptargs', u'tm_extrajdl', u'tm_asourl', u'tm_collector', u'tm_schedd', u'tm_dry_run', u'tm_user_files', u'tm_transfer_outputs', u'tm_output_lfn', u'tm_ignore_locality', u'tm_fail_limit', u'tm_one_event_mode', u'tm_secondary_input_dataset', u'tm_primary_dataset', u'tm_last_publication', u'tm_debug_files', u'clusterid', u'tm_asodb', u'tm_ignore_global_blacklist', u'tm_submitter_ip_addr', u'tm_totalunits', u'tm_ddm_reqid']}}
+INFO 2020-06-08 15:20:27.678 UTC: 	 CRAB project directory:		/afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-08 15:20:27.678 UTC: 	 Task name:			200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-08 15:20:27.678 UTC: 	 Grid scheduler - Task Worker:	crab3@vocms0122.cern.ch - crab-prod-tw02
+INFO 2020-06-08 15:20:27.678 UTC: 	 Status on the CRAB server:	SUBMITTED
+INFO 2020-06-08 15:20:27.678 UTC: 	 Task URL to use for HELP:	https://cmsweb.cern.ch/crabserver/ui/task/200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+INFO 2020-06-08 15:20:27.691 UTC: 	 Dashboard monitoring URL:	https://monit-grafana.cern.ch/d/cmsTMDetail/cms-task-monitoring-task-view?orgId=11&var-user=srosenzw&var-task=200604_171748%3Asrosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU&from=1591291068000&to=now
+INFO 2020-06-08 15:20:27.691 UTC: 	 In case of issues with the dashboard, please provide feedback to hn-cms-computing-tools@cern.ch
+DEBUG 2020-06-08 15:20:27.691 UTC: 	 The CRAB server submitted your task to the Grid scheduler (cluster ID: 58279797)
+DEBUG 2020-06-08 15:20:27.691 UTC: 	 Webdir is located at http://vocms0122.cern.ch/mon/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-08 15:20:27.773 UTC: 	 Proxied webdir is located at https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU
+DEBUG 2020-06-08 15:20:27.774 UTC: 	 Retrieving 'status_cache' file from https://cmsweb.cern.ch/scheddmon/0122/cms286/200604_171748:srosenzw_crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/status_cache
+DEBUG 2020-06-08 15:20:28.418 UTC: 	 Got information from status cache file: {'0-4': {'Retries': 0, 'WallDurations': [0, 1299.0], 'StartTimes': [1591291501.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279801.0'], 'EndTimes': [1591292800.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1251944], 'TotalUserCpuTimeHistory': [842], 'SiteHistory': ['Unknown', 'T1_US_FNAL'], 'TotalSysCpuTimeHistory': [18]}, '0-5': {'Retries': 0, 'WallDurations': [8.0, 1116.0], 'StartTimes': [1591291522.0], 'SubmitTimes': [1591291154.0], 'JobIds': ['58279804.0'], 'EndTimes': [1591292638.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1273680], 'TotalUserCpuTimeHistory': [740], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [38]}, '0-1': {'Retries': 0, 'WallDurations': [8.0, 644.0], 'StartTimes': [1591291521.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279802.0'], 'EndTimes': [1591292165.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1272560], 'TotalUserCpuTimeHistory': [347], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [16]}, '0-2': {'Retries': 0, 'WallDurations': [9.0, 1063.0], 'StartTimes': [1591291490.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279803.0'], 'EndTimes': [1591292553.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1250988], 'TotalUserCpuTimeHistory': [598], 'SiteHistory': ['Unknown', 'T1_ES_PIC'], 'TotalSysCpuTimeHistory': [16]}, '0-3': {'Retries': 0, 'WallDurations': [8.0, 1374.0], 'StartTimes': [1591291626.0], 'SubmitTimes': [1591291153.0], 'JobIds': ['58279800.0'], 'EndTimes': [1591293000.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1070520], 'TotalUserCpuTimeHistory': [268], 'SiteHistory': ['Unknown', 'T2_US_Vanderbilt'], 'TotalSysCpuTimeHistory': [19]}, '1': {'Retries': 0, 'WallDurations': [9.0, 930.0], 'StartTimes': [1591294158.0], 'SubmitTimes': [1591293574.0], 'JobIds': ['58281434.0'], 'EndTimes': [1591295088.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1254616], 'TotalUserCpuTimeHistory': [606], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [40]}, '3': {'Retries': 0, 'WallDurations': [9.0, 1365.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281435.0'], 'EndTimes': [1591295519.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1377424], 'TotalUserCpuTimeHistory': [915], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [35]}, '2': {'Retries': 0, 'WallDurations': [8.0, 1429.0], 'StartTimes': [1591294154.0], 'SubmitTimes': [1591293575.0], 'JobIds': ['58281436.0'], 'EndTimes': [1591295583.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1307828], 'TotalUserCpuTimeHistory': [910], 'SiteHistory': ['Unknown', 'T2_US_Wisconsin'], 'TotalSysCpuTimeHistory': [41]}, '5': {'Retries': 0, 'WallDurations': [9.0, 3253.0], 'StartTimes': [1591294155.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281439.0'], 'EndTimes': [1591297408.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1699688], 'TotalUserCpuTimeHistory': [1909], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [126]}, '4': {'Retries': 0, 'WallDurations': [9.0, 2089.0], 'StartTimes': [1591294149.0], 'SubmitTimes': [1591293576.0], 'JobIds': ['58281437.0'], 'EndTimes': [1591296238.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1613000], 'TotalUserCpuTimeHistory': [1423], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [53]}, '6': {'Retries': 0, 'WallDurations': [8.0, 1585.0], 'StartTimes': [1591294152.0], 'SubmitTimes': [1591293577.0], 'JobIds': ['58281440.0'], 'EndTimes': [1591295737.0], 'Restarts': 0, 'RecordedSite': True, 'State': 'finished', 'ResidentSetSize': [1524572], 'TotalUserCpuTimeHistory': [1069], 'SiteHistory': ['Unknown', 'T2_EE_Estonia'], 'TotalSysCpuTimeHistory': [55]}}
+INFO 2020-06-08 15:20:28.418 UTC: 	 Status on the scheduler:	COMPLETED
+INFO 2020-06-08 15:20:28.418 UTC: 	 
+The job splitting of this task is 'Automatic', please refer to this FAQ for a description of the jobs status summary:
+https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#What_is_the_Automatic_splitting
+INFO 2020-06-08 15:20:28.419 UTC: 	 
+Jobs status:                    finished     		100.0% (6/6)
+INFO 2020-06-08 15:20:28.419 UTC: 	 
+No publication information (publication has been disabled in the CRAB configuration file)
+INFO 2020-06-08 15:20:28.419 UTC: 	 
+Warning: the max jobs runtime is less than 30% of the task requested value (1250 min), please consider to request a lower value for failed jobs (allowed through crab resubmit) and/or improve the jobs splitting (e.g. config.Data.splitting = 'Automatic') in a new task.
+INFO 2020-06-08 15:20:28.419 UTC: 	 
+Summary of run jobs:
+ * Memory: 1225MB min, 1659MB max, 1429MB ave
+ * Runtime: 0:10:44 min, 0:54:13 max, 0:29:35 ave
+ * CPU eff: 63% min, 71% max, 67% ave
+ * Waste: 0:00:52 (0% of total)
+
+INFO 2020-06-08 15:20:28.496 UTC: 	 Log file is /afs/cern.ch/user/s/srosenzw/displacedmuons/CMSSW_11_0_2/src/logs/crab_L1Ntuple_ZMM_RAW_EMU_cmssw_11_0_2_GEN_SIM_RAW_wEMU/crab.log
