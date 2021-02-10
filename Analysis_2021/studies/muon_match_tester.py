@@ -9,10 +9,6 @@ from logger import info
 def muon_mask(gen_array):
     return gen_array[(abs(tree['genPart_ID']) == 13) & (tree['genPart_parentID'] == 6000113)]
 
-def mask(gen_array):
-    muons = muon_mask(gen_array)
-    return muons[matching]
-
 def match_muons(evt_deltaR, evt, threshold):
 
     inds = evt_deltaR.argsort(axis=1)
@@ -53,7 +49,7 @@ def match_muons(evt_deltaR, evt, threshold):
 
     return emtf_indices, gen_indices
 
-threshold = 1
+threshold = 0.6
 
 
 config_file = 'input_files.cfg'
@@ -144,13 +140,10 @@ for evt in range(nevents):
 
 info("Event analysis completed.")
 
-assert(nmuons == tot_gen)
+nemtf = len(tree['emtfTrack_pt'].flatten())
 
-print(gen_index)
-print(emtf_index)
-
-print(len(set(gen_index)))
-print(len(gen_index))
+assert nmuons == tot_gen, f"nmuons = {nmuons}, tot_gen = {tot_gen}"
+assert nemtf == tot_emtf, f"nemtf = {nemtf}, tot_emtf = {tot_emtf}"
 
 gen_index =  gen_index.astype(int)
 emtf_index = emtf_index.astype(int)
@@ -161,5 +154,9 @@ assert(-1 not in emtf_index)
 assert(len(set(emtf_index)) == len(emtf_index))
 assert(len(set(gen_index)) == len(gen_index))
 
+before_decimal = int(np.floor(threshold))
+after_decimal = int((threshold - before_decimal)*10)
 
-np.savez('gen_emtf_matching_masks.npz', gen_mask=gen_index, emtf_index=emtf_index, gen_muons=muon)
+filename = f'gen_emtf_matching_masks_{before_decimal}pt{after_decimal}.npz'
+np.savez(filename, gen_mask=gen_index, emtf_index=emtf_index, gen_muons=muon[gen_index])
+print(filename)
