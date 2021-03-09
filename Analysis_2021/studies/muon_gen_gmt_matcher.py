@@ -66,6 +66,8 @@ config.read(config_file)
 HtoLL    = config['HtoLL']['filename']
 treename = config['HtoLL']['treename']
 
+HtoLL  = '/eos/cms/store/user/eyigitba/emtf/L1Ntuples/Run3/crabOut/HTo2LongLivedTo4mu_combined/EMTFNtuple_HTo2LLTo4Mu_combined_cmssw_11_2_0_pre8_fwImplementation_NNv5.root'
+
 tree = get_uproot_Table(HtoLL, treename)
 
 nevents = len(tree['genPart_pt'])
@@ -141,7 +143,7 @@ for evt in range(nevents):
     gmt_gen_indices = gen_gmt_dict.values()
 
     emtf_gmt_deltaR = emtf_gmt_deltaR.reshape(nemtf, ngmt)
-    gmt_emtf_dict = match_muons(emtf_gmt_deltaR, evt,  10) #  matching occurs here
+    gmt_emtf_dict = match_muons(emtf_gmt_deltaR, evt,  5) #  matching occurs here
     gmt_emtf_indices = gmt_emtf_dict.keys()
     emtf_gmt_indices = gmt_emtf_dict.values()    
     
@@ -191,9 +193,10 @@ flat_emtf_indices = np.array((flat_emtf_indices))
 flat_gmt_indices = np.array((flat_gmt_indices))
 flat_gen_indices = np.array(([item for sublist in flat_gen_indices for item in sublist]))
 
+# Awakward persist refuses to overwrite so we must remove them before we can use them.
 if os.path.isfile("matching/awk_gen_mask.awkd"):
     os.remove("matching/awk_gen_mask.awkd")
-if os.path.isfile("amatching/wk_gen_index.awkd"):
+if os.path.isfile("matching/awk_gen_index.awkd"):
     os.remove("matching/awk_gen_index.awkd")
 if os.path.isfile("matching/awk_emtf_mask.awkd"):
     os.remove("matching/awk_emtf_mask.awkd")
@@ -201,14 +204,14 @@ if os.path.isfile("matching/awk_emtf_index.awkd"):
     os.remove("matching/awk_emtf_index.awkd")    
 
 gen_mask = awk.fromiter(gen_mask)
-awk.persist.save("awk_gen_mask", gen_mask)
+awk.persist.save("matching/awk_gen_mask", gen_mask)
 awk_gen_index = awk.fromiter(gen2emtf_indices)
-awk.persist.save("awk_gen_index", awk_gen_index)
+awk.persist.save("matching/awk_gen_index", awk_gen_index)
 
 emtf_mask = awk.fromiter(emtf_mask)
-awk.persist.save("awk_emtf_mask", emtf_mask)
+awk.persist.save("matching/awk_emtf_mask", emtf_mask)
 awk_emtf_index = awk.fromiter(emtf_indices)
-awk.persist.save("awk_emtf_index", awk_emtf_index)
+awk.persist.save("matching/awk_emtf_index", awk_emtf_index)
 
 nemtf = len(tree['emtfTrack_pt'].flatten())
 
@@ -220,6 +223,6 @@ after_decimal = int((threshold - before_decimal)*10)
 
 assert(len(flat_emtf_indices) == len(flat_gen_indices))
 
-filename = f'matching/gen_gmt/gen_gmt_matching_masks_{before_decimal}pt{after_decimal}.npz'
+filename = f'matching/gen_gmt/gen_gmt_matching_masks_{before_decimal}pt{after_decimal}_pre8.npz'
 np.savez(filename, emtf_indices=flat_emtf_indices, gen_indices=flat_gen_indices, gmt_indices=flat_gmt_indices)
 print(filename)
