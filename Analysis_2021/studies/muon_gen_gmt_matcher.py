@@ -66,14 +66,14 @@ config.read(config_file)
 HtoLL    = config['HtoLL']['filename']
 treename = config['HtoLL']['treename']
 
-HtoLL  = '/eos/cms/store/user/eyigitba/emtf/L1Ntuples/Run3/crabOut/HTo2LongLivedTo4mu_combined/EMTFNtuple_HTo2LLTo4Mu_combined_cmssw_11_2_0_pre8_fwImplementation_NNv5.root'
-
 tree = get_uproot_Table(HtoLL, treename)
 
 nevents = len(tree['genPart_pt'])
 muon = (abs(tree['genPart_ID']) == 13) & (tree['genPart_parentID'] == 6000113)
 muons = tree['genPart_pt'][muon].flatten()
 nmuons = len(muons)
+
+print(nmuons)
 
 tot_gen = 0
 tot_gmt = 0
