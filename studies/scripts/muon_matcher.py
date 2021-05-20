@@ -102,15 +102,18 @@ config = ConfigParser()
 config.optionxform = str
 config.read(config_file)
 
-HtoLL    = config['HtoLL']['filename']
-treename = config['HtoLL']['treename']
+sample = 'HtoLL'
+sample = 'MuonGun'
 
-info(f"Importing ROOT file from {CYAN+HtoLL+W}")
-tree = open_up(HtoLL, treename)
+filename    = config[sample]['filename']
+treename = config[sample]['treename']
 
-nevents = len(tree['genPart_pt'])
-muon = (abs(tree['genPart_ID']) == 13) & (tree['genPart_parentID'] == 6000113)
-muons = tree['genPart_pt'][muon].flatten()
+info(f"Importing ROOT file from {CYAN+filename+W}")
+tree, table, nptab = open_up(filename, treename)
+
+nevents = len(nptab['genPart_pt'])
+muon = (abs(nptab['genPart_ID']) == 13) & (nptab['genPart_parentID'] == 6000113)
+muons = nptab['genPart_pt'][muon].flatten()
 nmuons = len(muons)
 
 tot_gen = 0
@@ -132,10 +135,10 @@ for evt in range(nevents):
         info(f"Analyzing event {evt}/{nevents}")
 
     # if evt > 1: break
-    ngmt = len(tree['gmtMuon_pt'][evt])
+    ngmt = len(nptab['gmtMuon_pt'][evt])
     evt_muons = muon[evt]
-    ngen = len(tree['genPart_pt'][evt][evt_muons])
-    nemtf = len(tree['emtfTrack_pt'][evt])
+    ngen = len(nptab['genPart_pt'][evt][evt_muons])
+    nemtf = len(nptab['emtfTrack_pt'][evt])
 
     begin_gen = tot_gen
     begin_emtf = tot_emtf
@@ -151,19 +154,19 @@ for evt in range(nevents):
         continue
 
     # gen muons
-    mu_eta = tree['genPart_eta'][evt][evt_muons]
-    mu_phi = tree['genPart_phi'][evt][evt_muons]
-    mu_vx = tree['genPart_vx'][evt][evt_muons]
-    mu_vy = tree['genPart_vy'][evt][evt_muons]
-    mu_vz = tree['genPart_vz'][evt][evt_muons]
+    mu_eta = nptab['genPart_eta'][evt][evt_muons]
+    mu_phi = nptab['genPart_phi'][evt][evt_muons]
+    mu_vx = nptab['genPart_vx'][evt][evt_muons]
+    mu_vy = nptab['genPart_vy'][evt][evt_muons]
+    mu_vz = nptab['genPart_vz'][evt][evt_muons]
     mu_etastar, mu_phistar = calcStar(mu_eta, mu_phi, mu_vx, mu_vy, mu_vz)
 
     # gmt muons
-    gmt_evt_eta = tree['gmtMuon_eta'][evt]
-    gmt_evt_phi = tree['gmtMuon_phi'][evt]
+    gmt_evt_eta = nptab['gmtMuon_eta'][evt]
+    gmt_evt_phi = nptab['gmtMuon_phi'][evt]
 
-    emtf_evt_eta = tree['emtfTrack_eta'][evt]
-    globPhi = (tree['emtfTrack_sector'][evt] - 1) * 96 + tree['emtfTrack_GMT_phi'][evt]
+    emtf_evt_eta = nptab['emtfTrack_eta'][evt]
+    globPhi = (nptab['emtfTrack_sector'][evt] - 1) * 96 + nptab['emtfTrack_GMT_phi'][evt]
     globPhi = (globPhi + 600) % 576
     emtf_evt_phi = globPhi * 0.010908
 
@@ -236,8 +239,8 @@ print("Num gmt  matched:",ngmtmatch)
 print("Num emtf matched:",nemtfmatch)
 
 try:
-    awk.persist.save("gen_ind.awkd", gen_indices)
-    awk.persist.save("emtf_ind.awkd", emtf_indices)
+    awk.persist.save(f"matching/{sample}_gen_ind.awkd", gen_indices)
+    awk.persist.save(f"matching/{sample}_emtf_ind.awkd", emtf_indices)
 except:
     error(f"JaggedArray files must be deleted before they can be written! - gen_ind.awkd - emtf_ind.awkd")
 
@@ -247,7 +250,7 @@ flat_gen_indices = np.array((flat_gen_indices), dtype=int)
 print(flat_emtf_indices)
 print(flat_gen_indices)
 
-nemtf = len(tree['emtfTrack_pt'].flatten())
+nemtf = len(nptab['emtfTrack_pt'].flatten())
 
 assert nmuons == tot_gen, f"nmuons = {nmuons}, tot_gen = {tot_gen}"
 assert nemtf == tot_emtf, f"nemtf = {nemtf}, tot_emtf = {tot_emtf}"
@@ -257,6 +260,6 @@ after_decimal = int((threshold - before_decimal)*10)
 
 assert(len(flat_emtf_indices) == len(flat_gen_indices))
 
-filename = f'matching/gen_gmt/gen_gmt_matching_masks_{before_decimal}pt{after_decimal}.npz'
+filename = f'matching/gen_gmt/{sample}_gen_gmt_matching_masks_{before_decimal}pt{after_decimal}.npz'
 np.savez(filename, emtf_indices=flat_emtf_indices, gen_indices=flat_gen_indices)
 print(filename)
