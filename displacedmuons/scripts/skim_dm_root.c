@@ -123,6 +123,7 @@ int skim_dm_root(){
   t1->Branch("matched_gen_phiStar",&matched_gen_phiStar);
 
   int eventCount = 0;
+  int matchedMu = 0;
   float z_ME2 = 808.0; // ME2 z coordinate in [cm]
   float r = 0.;
   float rStar = 0.;
@@ -133,14 +134,12 @@ int skim_dm_root(){
     if (eventCount % 10000 == 0) {
       std::cout << eventCount << " events read!" << std::endl;
     } 
-    if (eventCount > 2000000) {continue;}
-    // if (eventCount > 100) {
-    //     continue;
-    // }
+    // if (eventCount > 2000000) {break;}
     eventCount++;
 
     
     int i = 0;
+
     // if (genPartVz[i] > 100) {
     //     continue;
     // }
@@ -234,15 +233,15 @@ int skim_dm_root(){
       continue;
     }
     
-    // Quality Cuts!
-    if (emtfTrackMode[i] < 11) {
-      t1->Fill();
-      continue;
-      }
-    if (emtfTrackMode[i] == 12) {
-      t1->Fill();
-      continue;
-      }
+    // // Quality Cuts!
+    // if (emtfTrackMode[i] < 11) {
+    //   t1->Fill();
+    //   continue;
+    //   }
+    // if (emtfTrackMode[i] == 12) {
+    //   t1->Fill();
+    //   continue;
+    //   }
 
     float GMTEta = emtfTrackGMTEta[i] * 0.010875;
 
@@ -258,14 +257,14 @@ int skim_dm_root(){
 
 
     // LOW PT MUONS SNEAKING IN? ADJUST DR CUT AND SEE IF THIS GOES AWAY.
-    if (dR_gmt_gen > 0.6) {
-      t1->Fill();
-      continue;
-      }
-    if (dR_gmt_emtf > 5) {
-      t1->Fill();
-      continue;
-    }
+    // if (dR_gmt_gen > 0.6) {
+    //   t1->Fill();
+    //   continue;
+    //   }
+    // if (dR_gmt_emtf > 5) {
+    //   t1->Fill();
+    //   continue;
+    // }
 
     
     // std::cout << gmtMuonEta[i] << " gmtMuonEta[i]" << std::endl;
@@ -285,9 +284,14 @@ int skim_dm_root(){
     emtfTrack_phi.push_back(gmtMuonPhi[i]);
     emtfTrack_dxy.push_back(emtfTrackDxy[i]);
 
+    matchedMu++;
+
     t1->Fill();
 
   } // end event loop
+
+  std::cout << "Events read:   " << eventCount << std::endl;
+  std::cout << "Muons matched: " << eventCount << std::endl;
 
   t1->Write();
 
