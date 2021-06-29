@@ -34,10 +34,9 @@ float DPhi(double phi1,double phi2){
 
 int skim_dm_root(){
 
-  bool v8 = false;
+  bool v8 = true;
 
   TString file1, file2;
-  TFile *fout;
 
   if (v8) {
     file1 = "samples/v8/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv8_1M.root";
@@ -49,10 +48,8 @@ int skim_dm_root(){
     file1 = "samples/v6/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv6_2M.root";
     file2 = "samples/v6/DisplacedMuGun_flatPt2to1000_posEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv6_2M.root";
 
-    TFile *fout =new TFile("samples/v6/DisplacedMuGun_flatPt2to1000_flatXYZEtaPhi_11_3_0_pre5_NNv6_skimmed.root","RECREATE");
+    TFile *fout =new TFile("samples/v6/DisplacedMuGun_flatPt2to1000_flatXYZEtaPhi_11_3_0_pre5_NNv6_skimmed_4.root","RECREATE");
   }
-  
-  
 
   // load trees
   TString tree = "EMTFNtuple/tree";
@@ -60,7 +57,6 @@ int skim_dm_root(){
   TTree * t1 =new TTree("tree","tree");
 
   TChain * cc=new TChain(tree);
-
 
   cc->Add(file1);
   cc->Add(file2);
@@ -94,7 +90,7 @@ int skim_dm_root(){
   TTreeReaderArray<float  > genPartVy(reader,"genPart_vy");
   TTreeReaderArray<float  > genPartVz(reader,"genPart_vz");
 
-  std::vector<float> emtfTrack_pt, emtfTrack_pt_dxy, emtfTrack_dxy, emtfTrack_phi, emtfTrack_eta, gen_pt, gen_d0, gen_vz, gen_eta, gen_phi, gen_etaStar, gen_phiStar, matched_gen_pt, matched_gen_d0, matched_gen_vz, matched_gen_eta, matched_gen_phi, matched_gen_etaStar, matched_gen_phiStar;
+  std::vector<float> emtfTrack_pt, emtfTrack_pt_dxy, emtfTrack_dxy, emtfTrack_phi, emtfTrack_eta, emtfTrack_dR, gen_pt, gen_d0, gen_vz, gen_eta, gen_phi, gen_etaStar, gen_phiStar, gen_dR, matched_gen_pt, matched_gen_d0, matched_gen_vz, matched_gen_eta, matched_gen_phi, matched_gen_etaStar, matched_gen_phiStar, matched_gen_dR;
 
   std::vector<int>   gen_q, matched_gen_q;
 
@@ -103,6 +99,7 @@ int skim_dm_root(){
   t1->Branch("emtfTrack_dxy",&emtfTrack_dxy);
   t1->Branch("emtfTrack_phi",&emtfTrack_phi);
   t1->Branch("emtfTrack_eta",&emtfTrack_eta);
+  t1->Branch("emtfTrack_dR",&emtfTrack_dR);
 
   t1->Branch("gen_q",&gen_q);
   t1->Branch("gen_pt",&gen_pt);
@@ -112,6 +109,7 @@ int skim_dm_root(){
   t1->Branch("gen_phi",&gen_phi);
   t1->Branch("gen_etaStar",&gen_etaStar);
   t1->Branch("gen_phiStar",&gen_phiStar);
+  t1->Branch("gen_dR",&gen_dR);
 
   t1->Branch("matched_gen_q",&matched_gen_q);
   t1->Branch("matched_gen_pt",&matched_gen_pt);
@@ -121,8 +119,8 @@ int skim_dm_root(){
   t1->Branch("matched_gen_phi",&matched_gen_phi);
   t1->Branch("matched_gen_etaStar",&matched_gen_etaStar);
   t1->Branch("matched_gen_phiStar",&matched_gen_phiStar);
+  t1->Branch("matched_gen_dR",&matched_gen_dR);
 
-  int eventCount = 0;
   int matchedMu = 0;
   float z_ME2 = 808.0; // ME2 z coordinate in [cm]
   float r = 0.;
@@ -130,13 +128,17 @@ int skim_dm_root(){
   float etaStar_gen = 0.;
   float phiStar_gen = 0.;
 
+  int eventCount = 0;
+  int saveCount = 0;
+
   while(reader.Next()){
     if (eventCount % 10000 == 0) {
       std::cout << eventCount << " events read!" << std::endl;
     } 
-    // if (eventCount > 2000000) {break;}
     eventCount++;
-
+    // if (eventCount > 20000000) {break;}
+    // if (eventCount < 15000000) {continue;}
+    saveCount++;
     
     int i = 0;
 
@@ -153,6 +155,7 @@ int skim_dm_root(){
     gen_etaStar.clear();
     gen_phiStar.clear();
     gen_d0.clear();
+    gen_dR.clear();
     gen_q.clear();
     gen_vz.clear();
 
@@ -162,6 +165,7 @@ int skim_dm_root(){
     matched_gen_etaStar.clear();
     matched_gen_phiStar.clear();
     matched_gen_d0.clear();
+    matched_gen_dR.clear();
     matched_gen_q.clear();
     matched_gen_vz.clear();
 
@@ -170,6 +174,7 @@ int skim_dm_root(){
     emtfTrack_eta.clear();
     emtfTrack_phi.clear();
     emtfTrack_dxy.clear();
+    emtfTrack_dR.clear();
 
 
     // convert displaced eta and phi to prompt-like and calculate dR between gen and l1 muon
@@ -180,8 +185,6 @@ int skim_dm_root(){
     rStar = TMath::Sqrt(xStar * xStar + yStar * yStar);
     
     etaStar_gen = TMath::ASinH(z_ME2/rStar) * (genPartEta[i]/abs(genPartEta[i]));
-
-    // if (abs(etaStar_gen) < 1.2 || abs(etaStar_gen) > 2.5 ) continue;
 
     if (xStar >= 0) phiStar_gen = TMath::ATan(yStar/xStar); 
     else if (yStar >= 0 && xStar < 0) phiStar_gen = TMath::Pi() + TMath::ATan(yStar/xStar); 
@@ -224,11 +227,13 @@ int skim_dm_root(){
     }
 
     if (*emtfTrackSize < 1) {
+      gen_dR.push_back(-1);
       t1->Fill();
       continue;
     }
 
     if (*gmtMuonSize < 1) {
+      gen_dR.push_back(-1);
       t1->Fill();
       continue;
     }
@@ -256,7 +261,7 @@ int skim_dm_root(){
     float dR_gmt_gen  = TMath::Sqrt((gmtMuonEta[i]-etaStar_gen)*(gmtMuonEta[i]-etaStar_gen)+DPhi(gmtMuonPhi[i],phiStar_gen)*DPhi(gmtMuonPhi[i],phiStar_gen));
 
 
-    // LOW PT MUONS SNEAKING IN? ADJUST DR CUT AND SEE IF THIS GOES AWAY.
+    // // LOW PT MUONS SNEAKING IN? ADJUST DR CUT AND SEE IF THIS GOES AWAY.
     // if (dR_gmt_gen > 0.6) {
     //   t1->Fill();
     //   continue;
@@ -276,22 +281,29 @@ int skim_dm_root(){
     matched_gen_etaStar.push_back(etaStar_gen);
     matched_gen_phiStar.push_back(phiStar_gen);
     matched_gen_d0.push_back(d0);
+    matched_gen_dR.push_back(dR_gmt_gen);
     matched_gen_q.push_back(genPartCharge[i]);
+
+    gen_dR.push_back(dR_gmt_gen);
 
     emtfTrack_pt.push_back(emtfTrackPt[i]);
     emtfTrack_pt_dxy.push_back(emtfTrackPtDxy[i]);
     emtfTrack_eta.push_back(gmtMuonEta[i]);
     emtfTrack_phi.push_back(gmtMuonPhi[i]);
     emtfTrack_dxy.push_back(emtfTrackDxy[i]);
+    emtfTrack_dR.push_back(dR_gmt_emtf);
 
     matchedMu++;
+
+
 
     t1->Fill();
 
   } // end event loop
 
   std::cout << "Events read:   " << eventCount << std::endl;
-  std::cout << "Muons matched: " << eventCount << std::endl;
+  std::cout << "Events saved:  " << saveCount << std::endl;
+  std::cout << "Muons matched: " << matchedMu << std::endl;
 
   t1->Write();
 
