@@ -34,15 +34,15 @@ float DPhi(double phi1,double phi2){
 
 int skim_dm_root(){
 
-  bool v8 = true;
+  bool v10 = true;
 
   TString file1, file2;
 
-  if (v8) {
-    file1 = "samples/v8/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv8_1M.root";
-    file2 = "samples/v8/DisplacedMuGun_flatPt2to1000_posEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv8_1M.root";
+  if (v10) {
+    file1 = "/eos/cms/store/user/eyigitba/emtf/L1Ntuples/Run3/crabOut/CRAB_PrivateMC/DisplacedMuGun_flatPt2to1000_posEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv10_5M/210628_090743/DisplacedMuGun_flatPt2to1000_posEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv10_5M.root";
+    file2 = "/eos/cms/store/user/eyigitba/emtf/L1Ntuples/Run3/crabOut/CRAB_PrivateMC/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv10_5M/210628_090811/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv10_5M.root";
 
-    TFile *fout =new TFile("samples/v8/DisplacedMuGun_flatPt2to1000_flatXYZEtaPhi_11_3_0_pre5_NNv8_skimmed.root","RECREATE");
+    TFile *fout =new TFile("samples/v10/DisplacedMuGun_flatPt2to1000_flatXYZEtaPhi_11_3_0_pre5_NNv10_skimmed.root","RECREATE");
   }
   else {
     file1 = "samples/v6/DisplacedMuGun_flatPt2to1000_negEndcap_flatXYZEtaPhi_11_3_0_pre5_NNv6_2M.root";
@@ -142,12 +142,6 @@ int skim_dm_root(){
     
     int i = 0;
 
-    // if (genPartVz[i] > 100) {
-    //     continue;
-    // }
-
-    // std::cout << eventCount << " events read!" << std::endl;
-
     // clear stuff
     gen_pt.clear();
     gen_eta.clear();
@@ -237,16 +231,6 @@ int skim_dm_root(){
       t1->Fill();
       continue;
     }
-    
-    // // Quality Cuts!
-    // if (emtfTrackMode[i] < 11) {
-    //   t1->Fill();
-    //   continue;
-    //   }
-    // if (emtfTrackMode[i] == 12) {
-    //   t1->Fill();
-    //   continue;
-    //   }
 
     float GMTEta = emtfTrackGMTEta[i] * 0.010875;
 
@@ -259,20 +243,6 @@ int skim_dm_root(){
     float dR_gmt_emtf = TMath::Sqrt((gmtMuonEta[i]-GMTEta)*(gmtMuonEta[i]-GMTEta)+DPhi(gmtMuonPhi[i],GMTPhi)*DPhi(gmtMuonPhi[i],GMTPhi));
 
     float dR_gmt_gen  = TMath::Sqrt((gmtMuonEta[i]-etaStar_gen)*(gmtMuonEta[i]-etaStar_gen)+DPhi(gmtMuonPhi[i],phiStar_gen)*DPhi(gmtMuonPhi[i],phiStar_gen));
-
-
-    // // LOW PT MUONS SNEAKING IN? ADJUST DR CUT AND SEE IF THIS GOES AWAY.
-    // if (dR_gmt_gen > 0.6) {
-    //   t1->Fill();
-    //   continue;
-    //   }
-    // if (dR_gmt_emtf > 5) {
-    //   t1->Fill();
-    //   continue;
-    // }
-
-    
-    // std::cout << gmtMuonEta[i] << " gmtMuonEta[i]" << std::endl;
 
     matched_gen_pt.push_back(genPartPt[i]);
     matched_gen_vz.push_back(genPartVz[i]);
@@ -294,8 +264,6 @@ int skim_dm_root(){
     emtfTrack_dR.push_back(dR_gmt_emtf);
 
     matchedMu++;
-
-
 
     t1->Fill();
 
