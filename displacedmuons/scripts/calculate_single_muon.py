@@ -9,10 +9,6 @@ import matplotlib.pyplot as plt
 import uproot
 import sys
 
-# from myuproot import open_up
-from kinematics import calcStar, calc_d0
-from logger import info
-
 def get_n(arr, bins, mask):
     n, edges = np.histogram(ak.to_list(arr[mask]), bins=bins)
     return n
@@ -51,9 +47,10 @@ def plot_eff(n_bdt, n_nn, n_both, n_den, bins, title, xlabel):
 
     ax.legend(custom_lines, [r'L1 $p_T^\mathrm{BDT} > 10 \;\mathrm{GeV} \;||\; L1 p_T^\mathrm{NN} > 10 \;\mathrm{GeV}$',
                              r'L1 $p_T^\mathrm{BDT} > 10 \;\mathrm{GeV}$',
-                             r'L1 $p_T^\mathrm{NN} > 10 \;\mathrm{GeV}$'])
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel('Efficiency')
+                             r'L1 $p_T^\mathrm{NN} > 10 \;\mathrm{GeV}$'], fontsize='xx-large')
+    ax.set_xlabel(xlabel, fontsize='xx-large')
+    ax.set_ylabel('Efficiency', fontsize='xx-large')
+    ax.tick_params(axis='both', labelsize='xx-large')
 
     plt.minorticks_on()
     plt.grid(b=True, color='lightgrey', linestyle='--', linewidth=1, which='both')
@@ -64,68 +61,81 @@ def plot_eff(n_bdt, n_nn, n_both, n_den, bins, title, xlabel):
     fig.savefig(f'{folder}{title}.pdf', bbox_inches=None)
 
 #############################################################
-# Import file info from config file
+# Import file print from config file
 config_file = 'config/input_files.cfg'
 config = ConfigParser()
 config.optionxform = str
 config.read(config_file)
 
-filename1 = config['MuonGun']['filename']
-# filename1 = config['MuonGun']['filename'] + "_1.root"
-# filename2 = config['MuonGun']['filename'] + "_2.root"
-# filename3 = config['MuonGun']['filename'] + "_3.root"
-# filename4 = config['MuonGun']['filename'] + "_4.root"
-treename = config['MuonGun']['treename']
 version = config['MuonGun']['version']
+treename = config['MuonGun']['treename']
+if version == 'v6':
+    filename1 = f'samples/v{version}/' + config['MuonGun']['filename'] + "_1.root"
+    filename2 = f'samples/v{version}/' + config['MuonGun']['filename'] + "_2.root"
+    filename3 = f'samples/v{version}/' + config['MuonGun']['filename'] + "_3.root"
+    filename4 = f'samples/v{version}/' + config['MuonGun']['filename'] + "_4.root"
+    filelist = [filename1, filename2, filename3, filename4]
+else:
+    filename1 = f'samples/v{version}/' + config['MuonGun']['filename']
+    filelist = [filename1]
 
 folder = f'efficiencies/v{version}/'
 
-# filelist = [filename1, filename2, filename3, filename4]
-filelist = [filename1]
 
-n_pt_num_bdt = 0
-n_pt_num_nn = 0
-n_pt_num_both = 0
-n_pt_denom = 0
 matched_n_pt_num_bdt = 0
 matched_n_pt_num_nn = 0
 matched_n_pt_num_both = 0
 matched_n_pt_denom = 0
-nocuts_n_pt_num_bdt = 0
-nocuts_n_pt_num_nn = 0
-nocuts_n_pt_num_both = 0
-nocuts_n_pt_denom = 0
-n_eta_num_bdt = 0
-n_eta_num_nn = 0
-n_eta_num_both = 0
-n_eta_denom= 0
-n_eta_num_bdt_noptcut = 0
-n_eta_num_nn_noptcut = 0
-n_eta_num_both_noptcut = 0
-n_eta_denom_noptcut = 0
+matched_n_pt_lo_eta_num_bdt = 0
+matched_n_pt_lo_eta_num_nn = 0
+matched_n_pt_lo_eta_num_both = 0
+matched_n_pt_lo_eta_denom = 0
+matched_n_pt_md_eta_num_bdt = 0
+matched_n_pt_md_eta_num_nn = 0
+matched_n_pt_md_eta_num_both = 0
+matched_n_pt_md_eta_denom = 0
+matched_n_pt_hi_eta_num_bdt = 0
+matched_n_pt_hi_eta_num_nn = 0
+matched_n_pt_hi_eta_num_both = 0
+matched_n_pt_hi_eta_denom = 0
+
+matched_n_invpt_num_bdt = 0
+matched_n_invpt_num_nn = 0
+matched_n_invpt_num_both = 0
+matched_n_invpt_denom = 0
+
 matched_n_eta_num_bdt = 0
 matched_n_eta_num_nn = 0
 matched_n_eta_num_both = 0
 matched_n_eta_denom = 0
-nocuts_n_eta_num_bdt = 0
-nocuts_n_eta_num_nn = 0
-nocuts_n_eta_num_both = 0
-nocuts_n_eta_denom = 0
-n_d0_num_bdt = 0
-n_d0_num_nn = 0
-n_d0_num_both = 0
-n_d0_denom = 0
+
 matched_n_d0_num_bdt = 0
 matched_n_d0_num_nn = 0
 matched_n_d0_num_both = 0
 matched_n_d0_denom = 0
-nocuts_n_d0_num_bdt = 0
-nocuts_n_d0_num_nn = 0
-nocuts_n_d0_num_both = 0
-nocuts_n_d0_denom = 0
+matched_n_d0_lo_eta_num_bdt = 0
+matched_n_d0_lo_eta_num_nn = 0
+matched_n_d0_lo_eta_num_both = 0
+matched_n_d0_lo_eta_denom = 0
+matched_n_d0_md_eta_num_bdt = 0
+matched_n_d0_md_eta_num_nn = 0
+matched_n_d0_md_eta_num_both = 0
+matched_n_d0_md_eta_denom = 0
+matched_n_d0_hi_eta_num_bdt = 0
+matched_n_d0_hi_eta_num_nn = 0
+matched_n_d0_hi_eta_num_both = 0
+matched_n_d0_hi_eta_denom = 0
 
+gen_pt_array = np.array(())
+bdt_pt_array = np.array(())
+nn_pt_array  = np.array(())
+
+gen_invpt_array = np.array(())
+bdt_invpt_array = np.array(())
+nn_invpt_array  = np.array(())
 
 ptbins = np.linspace(0, 60, 30)
+invptbins = np.linspace(-0.02, 0.02, 30)
 d0bins = np.linspace(0, 100, 60)
 etabins = [-2.5, -2.1, -1.6, -1.24]
 for eta in etabins[::-1]:
@@ -134,18 +144,16 @@ etabins = np.array((etabins))
 ic(etabins)
 
 for filename in filelist:
-    info("Loading file")
-    # info(filename)
-
+    print("Loading file")
     ic(filename)
 
     with uproot.open(filename) as file:
-        info("Loaded file.")
+        print("Loaded file.")
 
         tree = file['tree']
         table = tree.arrays()
 
-        info("Extracting branches.")
+        print("Extracting branches.")
 
         gen_pt      = ak.flatten(table['gen_pt'])
         gen_phi     = ak.flatten(table['gen_phi'])
@@ -179,6 +187,17 @@ for filename in filelist:
         gen_dR_mask = (matched_gen_dR < 0.6)
         emtf_dR_mask = matched_dR < 5
 
+        gen_pt_array = np.append(gen_pt_array, ak.to_numpy(matched_gen_pt[emtf_dR_mask]))
+        bdt_pt_array = np.append(bdt_pt_array, ak.to_numpy(BDT_pt[emtf_dR_mask]))
+        nn_pt_array  = np.append(nn_pt_array, ak.to_numpy(NN_pt[emtf_dR_mask]))
+
+        temp_invpt     = matched_gen_q/matched_gen_pt
+        temp_invpt_bdt = matched_gen_q/BDT_pt
+        temp_invpt_nn  = matched_gen_q/NN_pt
+        gen_invpt_array = np.append(gen_invpt_array, ak.to_numpy(temp_invpt[emtf_dR_mask]))
+        bdt_invpt_array = np.append(bdt_invpt_array, ak.to_numpy(temp_invpt_bdt[emtf_dR_mask]))
+        nn_invpt_array  = np.append(nn_invpt_array, ak.to_numpy(temp_invpt_nn[emtf_dR_mask]))
+
         denom_mask = (abs(gen_vz) < 100) & (abs(gen_d0) < 100)
         num_mask = (abs(matched_gen_vz) < 100) & (abs(matched_gen_d0) < 100) 
         match_mask = (emtf_dR_mask & gen_dR_mask)
@@ -202,134 +221,79 @@ for filename in filelist:
 
         denom_d0_mask = gen_d0 < 20
 
-        ##############################################################################
+
+        # ##############################################################################
         ## pT efficiency
         den_pt_mask  = denom_mask & denom_eta_mask
-
-        # no matching eff (eta cut but no matching cut)
-        num_pt_bdt_mask  = num_mask & num_eta_mask & pt_mask_bdt
-        num_pt_nn_mask   = num_mask & num_eta_mask & pt_mask_nn
-        num_pt_both_mask = num_mask & num_eta_mask & pt_mask_both
-
-        n_pt_num_bdt  += get_n(matched_gen_pt, ptbins, num_pt_bdt_mask)
-        n_pt_num_nn   += get_n(matched_gen_pt, ptbins, num_pt_nn_mask)
-        n_pt_num_both += get_n(matched_gen_pt, ptbins, num_pt_both_mask)
-        n_pt_denom    += get_n(gen_pt, ptbins, den_pt_mask)
+        den_pt_lo_eta_mask  = denom_mask & denom_lo_eta_mask
+        den_pt_md_eta_mask  = denom_mask & denom_md_eta_mask
+        den_pt_hi_eta_mask  = denom_mask & denom_hi_eta_mask
 
         # matching eff, 0.6, 5
         matched_num_pt_bdt_mask  = num_mask & num_eta_mask & match_mask & pt_mask_bdt
         matched_num_pt_nn_mask   = num_mask & num_eta_mask & match_mask & pt_mask_nn
         matched_num_pt_both_mask = num_mask & num_eta_mask & match_mask & pt_mask_both
+        matched_num_pt_lo_eta_bdt_mask  = num_mask & num_lo_eta_mask & match_mask & pt_mask_bdt
+        matched_num_pt_lo_eta_nn_mask   = num_mask & num_lo_eta_mask & match_mask & pt_mask_nn
+        matched_num_pt_lo_eta_both_mask = num_mask & num_lo_eta_mask & match_mask & pt_mask_both
+        matched_num_pt_md_eta_bdt_mask  = num_mask & num_md_eta_mask & match_mask & pt_mask_bdt
+        matched_num_pt_md_eta_nn_mask   = num_mask & num_md_eta_mask & match_mask & pt_mask_nn
+        matched_num_pt_md_eta_both_mask = num_mask & num_md_eta_mask & match_mask & pt_mask_both
+        matched_num_pt_hi_eta_bdt_mask  = num_mask & num_hi_eta_mask & match_mask & pt_mask_bdt
+        matched_num_pt_hi_eta_nn_mask   = num_mask & num_hi_eta_mask & match_mask & pt_mask_nn
+        matched_num_pt_hi_eta_both_mask = num_mask & num_hi_eta_mask & match_mask & pt_mask_both
 
         matched_n_pt_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_bdt_mask)
         matched_n_pt_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_nn_mask)
         matched_n_pt_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_both_mask)
         matched_n_pt_denom    += get_n(gen_pt, ptbins, den_pt_mask)
-
-        # no cuts (no eta)
-        nocuts_num_pt_bdt_mask  = num_mask & pt_mask_bdt
-        nocuts_num_pt_nn_mask   = num_mask & pt_mask_nn
-        nocuts_num_pt_both_mask = num_mask & pt_mask_both
-
-        nocuts_n_pt_num_bdt  += get_n(matched_gen_pt, ptbins, nocuts_num_pt_bdt_mask)
-        nocuts_n_pt_num_nn   += get_n(matched_gen_pt, ptbins, nocuts_num_pt_nn_mask)
-        nocuts_n_pt_num_both += get_n(matched_gen_pt, ptbins, nocuts_num_pt_both_mask)
-        nocuts_n_pt_denom    += get_n(gen_pt, ptbins, denom_mask)
+        matched_n_pt_lo_eta_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_eta_bdt_mask)
+        matched_n_pt_lo_eta_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_eta_nn_mask)
+        matched_n_pt_lo_eta_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_eta_both_mask)
+        matched_n_pt_lo_eta_denom    += get_n(gen_pt, ptbins, den_pt_lo_eta_mask)
+        matched_n_pt_md_eta_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_md_eta_bdt_mask)
+        matched_n_pt_md_eta_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_md_eta_nn_mask)
+        matched_n_pt_md_eta_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_md_eta_both_mask)
+        matched_n_pt_md_eta_denom    += get_n(gen_pt, ptbins, den_pt_md_eta_mask)
+        matched_n_pt_hi_eta_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_eta_bdt_mask)
+        matched_n_pt_hi_eta_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_eta_nn_mask)
+        matched_n_pt_hi_eta_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_eta_both_mask)
+        matched_n_pt_hi_eta_denom    += get_n(gen_pt, ptbins, den_pt_hi_eta_mask)
 
 
         ##############################################################################
-        ## eta efficiency
-        den_eta_mask  = denom_mask & denom_eta_mask & denom_pt_mask
-
-        # no matching eff (eta cut but no matching cut)
-        num_eta_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & pt_mask_bdt
-        num_eta_nn_mask   = num_mask & num_eta_mask & num_pt_mask & pt_mask_nn
-        num_eta_both_mask = num_mask & num_eta_mask & num_pt_mask & pt_mask_both
-
-        n_eta_num_bdt  += get_n(matched_gen_eta, etabins, num_eta_bdt_mask)
-        n_eta_num_nn   += get_n(matched_gen_eta, etabins, num_eta_nn_mask)
-        n_eta_num_both += get_n(matched_gen_eta, etabins, num_eta_both_mask)
-        n_eta_denom    += get_n(gen_eta, etabins, den_eta_mask)
+        ## 1/pT efficiency
+        den_invpt_mask  = denom_mask & denom_eta_mask
 
         # matching eff, 0.6, 5
-        matched_num_eta_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_bdt
-        matched_num_eta_nn_mask   = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_nn
-        matched_num_eta_both_mask = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_both
+        matched_num_invpt_bdt_mask  = num_mask & num_eta_mask & match_mask & pt_mask_bdt
+        matched_num_invpt_nn_mask   = num_mask & num_eta_mask & match_mask & pt_mask_nn
+        matched_num_invpt_both_mask = num_mask & num_eta_mask & match_mask & pt_mask_both
 
-        matched_n_eta_num_bdt  += get_n(matched_gen_eta, etabins, matched_num_eta_bdt_mask)
-        matched_n_eta_num_nn   += get_n(matched_gen_eta, etabins, matched_num_eta_nn_mask)
-        matched_n_eta_num_both += get_n(matched_gen_eta, etabins, matched_num_eta_both_mask)
-        matched_n_eta_denom    += get_n(gen_eta, etabins, den_eta_mask)
-
-        # no cuts (no eta)
-        nocuts_num_eta_bdt_mask  = num_mask & num_pt_mask & pt_mask_bdt
-        nocuts_num_eta_nn_mask   = num_mask & num_pt_mask & pt_mask_nn
-        nocuts_num_eta_both_mask = num_mask & num_pt_mask & pt_mask_both
-
-        nocuts_n_eta_num_bdt  += get_n(matched_gen_eta, etabins, nocuts_num_eta_bdt_mask)
-        nocuts_n_eta_num_nn   += get_n(matched_gen_eta, etabins, nocuts_num_eta_nn_mask)
-        nocuts_n_eta_num_both += get_n(matched_gen_eta, etabins, nocuts_num_eta_both_mask)
-        nocuts_n_eta_denom    += get_n(gen_eta, etabins, denom_mask)
-
+        matched_n_invpt_num_bdt  += get_n(matched_gen_q/matched_gen_pt, invptbins, matched_num_invpt_bdt_mask)
+        matched_n_invpt_num_nn   += get_n(matched_gen_q/matched_gen_pt, invptbins, matched_num_invpt_nn_mask)
+        matched_n_invpt_num_both += get_n(matched_gen_q/matched_gen_pt, invptbins, matched_num_invpt_both_mask)
+        matched_n_invpt_denom    += get_n(gen_q/gen_pt, invptbins, den_invpt_mask)
 
         ##############################################################################
         ## eta efficiency
         den_eta_mask  = denom_mask & denom_eta_mask & denom_pt_mask
         den_eta_mask_noptcut  = denom_mask & denom_eta_mask
 
-        # no matching eff (eta cut but no matching cut)
-        num_eta_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & pt_mask_bdt
-        num_eta_nn_mask   = num_mask & num_eta_mask & num_pt_mask & pt_mask_nn
-        num_eta_both_mask = num_mask & num_eta_mask & num_pt_mask & pt_mask_both
-
-        num_eta_bdt_mask_noptcut  = num_mask & num_eta_mask & match_mask & pt_mask_bdt
-        num_eta_nn_mask_noptcut   = num_mask & num_eta_mask & match_mask & pt_mask_nn
-        num_eta_both_mask_noptcut = num_mask & num_eta_mask & match_mask & pt_mask_both
-
-        n_eta_num_bdt  += get_n(matched_gen_eta, etabins, num_eta_bdt_mask)
-        n_eta_num_nn   += get_n(matched_gen_eta, etabins, num_eta_nn_mask)
-        n_eta_num_both += get_n(matched_gen_eta, etabins, num_eta_both_mask)
-        n_eta_denom    += get_n(gen_eta, etabins, den_eta_mask)
-        
-        n_eta_num_bdt_noptcut  += get_n(matched_gen_eta, etabins, num_eta_bdt_mask_noptcut)
-        n_eta_num_nn_noptcut   += get_n(matched_gen_eta, etabins, num_eta_nn_mask_noptcut)
-        n_eta_num_both_noptcut += get_n(matched_gen_eta, etabins, num_eta_both_mask_noptcut)
-        n_eta_denom_noptcut    += get_n(gen_eta, etabins, den_eta_mask_noptcut)
-
         # matching eff, 0.6, 5
         matched_num_eta_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_bdt
         matched_num_eta_nn_mask   = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_nn
         matched_num_eta_both_mask = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_both
 
-        matched_n_eta_num_bdt  += get_n(matched_gen_eta, etabins, matched_num_eta_bdt_mask)
-        matched_n_eta_num_nn   += get_n(matched_gen_eta, etabins, matched_num_eta_nn_mask)
-        matched_n_eta_num_both += get_n(matched_gen_eta, etabins, matched_num_eta_both_mask)
-        matched_n_eta_denom    += get_n(gen_eta, etabins, den_eta_mask)
-
-        # no cuts (no eta)
-        nocuts_num_eta_bdt_mask  = num_mask & pt_mask_bdt
-        nocuts_num_eta_nn_mask   = num_mask & pt_mask_nn
-        nocuts_num_eta_both_mask = num_mask & pt_mask_both
-
-        nocuts_n_eta_num_bdt  += get_n(matched_gen_eta, etabins, nocuts_num_eta_bdt_mask)
-        nocuts_n_eta_num_nn   += get_n(matched_gen_eta, etabins, nocuts_num_eta_nn_mask)
-        nocuts_n_eta_num_both += get_n(matched_gen_eta, etabins, nocuts_num_eta_both_mask)
-        nocuts_n_eta_denom    += get_n(gen_eta, etabins, denom_mask)
+        matched_n_eta_num_bdt  += get_n(matched_gen_etaStar, etabins, matched_num_eta_bdt_mask)
+        matched_n_eta_num_nn   += get_n(matched_gen_etaStar, etabins, matched_num_eta_nn_mask)
+        matched_n_eta_num_both += get_n(matched_gen_etaStar, etabins, matched_num_eta_both_mask)
+        matched_n_eta_denom    += get_n(gen_etaStar, etabins, den_eta_mask)
 
 
         ##############################################################################
         ## d0 efficiency
         den_d0_mask  = denom_mask & denom_eta_mask & denom_pt_mask
-
-        # no matching eff (eta cut but no matching cut)
-        num_d0_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & pt_mask_bdt
-        num_d0_nn_mask   = num_mask & num_eta_mask & num_pt_mask & pt_mask_nn
-        num_d0_both_mask = num_mask & num_eta_mask & num_pt_mask & pt_mask_both
-
-        n_d0_num_bdt  += get_n(matched_gen_d0, d0bins, num_d0_bdt_mask)
-        n_d0_num_nn   += get_n(matched_gen_d0, d0bins, num_d0_nn_mask)
-        n_d0_num_both += get_n(matched_gen_d0, d0bins, num_d0_both_mask)
-        n_d0_denom    += get_n(gen_d0, d0bins, den_d0_mask)
 
         # matching eff, 0.6, 5
         matched_num_d0_bdt_mask  = num_mask & num_eta_mask & num_pt_mask & match_mask & pt_mask_bdt
@@ -341,38 +305,31 @@ for filename in filelist:
         matched_n_d0_num_both += get_n(matched_gen_d0, d0bins, matched_num_d0_both_mask)
         matched_n_d0_denom    += get_n(gen_d0, d0bins, den_d0_mask)
 
-        # no cuts (no eta)
-        nocuts_num_d0_bdt_mask  = num_mask & pt_mask_bdt
-        nocuts_num_d0_nn_mask   = num_mask & pt_mask_nn
-        nocuts_num_d0_both_mask = num_mask & pt_mask_both
 
-        nocuts_n_d0_num_bdt  += get_n(matched_gen_d0, d0bins, nocuts_num_d0_bdt_mask)
-        nocuts_n_d0_num_nn   += get_n(matched_gen_d0, d0bins, nocuts_num_d0_nn_mask)
-        nocuts_n_d0_num_both += get_n(matched_gen_d0, d0bins, nocuts_num_d0_both_mask)
-        nocuts_n_d0_denom    += get_n(gen_d0, d0bins, denom_mask)
+
 
 ## pt plotting
-plot_eff(n_pt_num_bdt, n_pt_num_nn, n_pt_num_both, n_pt_denom, ptbins, r'pt efficiency, all eta, no matching', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
 
 plot_eff(matched_n_pt_num_bdt, matched_n_pt_num_nn, matched_n_pt_num_both, matched_n_pt_denom, ptbins, r'pt efficiency, all eta', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
+plot_eff(matched_n_pt_lo_eta_num_bdt, matched_n_pt_lo_eta_num_nn, matched_n_pt_lo_eta_num_both, matched_n_pt_lo_eta_denom, ptbins, r'pt efficiency, low eta', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
+plot_eff(matched_n_pt_md_eta_num_bdt, matched_n_pt_md_eta_num_nn, matched_n_pt_md_eta_num_both, matched_n_pt_md_eta_denom, ptbins, r'pt efficiency, med eta', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
+plot_eff(matched_n_pt_hi_eta_num_bdt, matched_n_pt_hi_eta_num_nn, matched_n_pt_hi_eta_num_both, matched_n_pt_hi_eta_denom, ptbins, r'pt efficiency, high eta', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
 
-plot_eff(nocuts_n_pt_num_bdt, nocuts_n_pt_num_nn, nocuts_n_pt_num_both, nocuts_n_pt_denom, ptbins, r'pt efficiency, no cuts', r'$p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
+## 1/pt plotting
+plot_eff(matched_n_invpt_num_bdt, matched_n_invpt_num_nn, matched_n_invpt_num_both, matched_n_invpt_denom, invptbins, r'invpt efficiency, all eta', r'$q^\mathrm{gen}/p_T^\mathrm{gen} [\;\mathrm{GeV}]$')
 
 ## eta plotting
-n_eta_num_bdt[3], n_eta_num_nn[3], n_eta_num_both[3], n_eta_denom[3] = 0, 0, 0, 0
-plot_eff(n_eta_num_bdt, n_eta_num_nn, n_eta_num_both, n_eta_denom, etabins, r'eta efficiency, all eta, no matching', r'$\eta^{*,\mathrm{gen}}$')
-
 matched_n_eta_num_bdt[3], matched_n_eta_num_nn[3], matched_n_eta_num_both[3], matched_n_eta_denom[3] = 0, 0, 0, 0
 plot_eff(matched_n_eta_num_bdt, matched_n_eta_num_nn, matched_n_eta_num_both, matched_n_eta_denom, etabins, r'eta efficiency, all eta', r'$\eta^{*\mathrm{gen}}$')
-n_eta_num_bdt_noptcut[3], n_eta_num_nn_noptcut[3], n_eta_num_both_noptcut[3], n_eta_denom_noptcut[3] = 0, 0, 0, 0
-plot_eff(n_eta_num_bdt_noptcut, n_eta_num_nn_noptcut, n_eta_num_both_noptcut, n_eta_denom_noptcut, etabins, r'eta efficiency, all eta, no pt cut', r'$\eta^{*\mathrm{gen}}$')
 
-nocuts_n_eta_num_bdt[3], nocuts_n_eta_num_nn[3], nocuts_n_eta_num_both[3], nocuts_n_eta_denom[3] = 0, 0, 0, 0
-plot_eff(nocuts_n_eta_num_bdt, nocuts_n_eta_num_nn, nocuts_n_eta_num_both, nocuts_n_eta_denom, etabins, r'eta efficiency, no cuts', r'$\eta{*^\mathrm{gen}}$')
-
-## eta plotting
-plot_eff(n_d0_num_bdt, n_d0_num_nn, n_d0_num_both, n_d0_denom, d0bins, r'd0 efficiency, all eta, no matching', r'$d_0^\mathrm{gen}$')
-
+## d0 plotting
 plot_eff(matched_n_d0_num_bdt, matched_n_d0_num_nn, matched_n_d0_num_both, matched_n_d0_denom, d0bins, r'd0 efficiency, all eta', r'$d_0^\mathrm{gen}$')
 
-plot_eff(nocuts_n_d0_num_bdt, nocuts_n_d0_num_nn, nocuts_n_d0_num_both, nocuts_n_d0_denom, d0bins, r'd0 efficiency, no cuts', r'$d_0^\mathrm{gen}$')
+
+assert len(gen_pt_array) == len(bdt_pt_array), ic(len(gen_pt_array), len(bdt_pt_array))
+assert len(gen_pt_array) == len(nn_pt_array),  ic(len(gen_pt_array), len(nn_pt_array))
+
+npz_filename = f"dm_pt_v{version}.npz"
+np.savez(npz_filename, gen_pt=gen_pt_array, bdt_pt=bdt_pt_array, nn_pt=nn_pt_array, gen_invpt=gen_invpt_array, bdt_invpt=bdt_invpt_array, nn_invpt=nn_invpt_array)
+
+print(f"File saved to {npz_filename}")
