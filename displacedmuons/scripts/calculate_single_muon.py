@@ -13,7 +13,7 @@ def get_n(arr, bins, mask):
     n, edges = np.histogram(ak.to_list(arr[mask]), bins=bins)
     return n
 
-def plot_eff(n_bdt, n_nn, n_both, n_den, bins, title, xlabel):
+def plot_eff(n_bdt, n_nn, n_both, n_den, bins, title, xlabel, etaskip=False):
     global folder
     eff_both = np.where(n_den == 0, 0, n_both/n_den)
     eff_bdt = np.where(n_den == 0, 0, n_bdt/n_den)
@@ -31,13 +31,15 @@ def plot_eff(n_bdt, n_nn, n_both, n_den, bins, title, xlabel):
     x = (bins[1:] + bins[:-1]) / 2
 
     for i,w in enumerate(eff_both):
-        if 'eta' in xlabel and i == 3: continue
+        if etaskip and i == 3: continue
         ax.plot([bins[i], bins[i+1]], [w,w], color='blue') # BDT or NN
         ax.plot([x[i], x[i]], [w-err_both[i], w+err_both[i]], color='blue')
     for i,w in enumerate(eff_bdt):
+        if etaskip and i == 3: continue
         ax.plot([bins[i], bins[i+1]], [w,w], color='black') # BDT
         ax.plot([x[i], x[i]], [w-err_bdt[i], w+err_bdt[i]], color='black')
     for i,w in enumerate(eff_nn):
+        if etaskip and i == 3: continue
         ax.plot([bins[i], bins[i+1]], [w,w], color='red') # NN
         ax.plot([x[i], x[i]], [w-err_nn[i], w+err_nn[i]], color='red')
 
@@ -86,63 +88,83 @@ matched_n_pt_num_bdt = 0
 matched_n_pt_num_nn = 0
 matched_n_pt_num_both = 0
 matched_n_pt_denom = 0
+n_pt_denom = 0
 matched_n_pt_lo_eta_num_bdt = 0
 matched_n_pt_lo_eta_num_nn = 0
 matched_n_pt_lo_eta_num_both = 0
 matched_n_pt_lo_eta_denom = 0
+n_pt_lo_eta_denom = 0
 matched_n_pt_md_eta_num_bdt = 0
 matched_n_pt_md_eta_num_nn = 0
 matched_n_pt_md_eta_num_both = 0
 matched_n_pt_md_eta_denom = 0
+n_pt_md_eta_denom = 0
 matched_n_pt_hi_eta_num_bdt = 0
 matched_n_pt_hi_eta_num_nn = 0
 matched_n_pt_hi_eta_num_both = 0
 matched_n_pt_hi_eta_denom = 0
+n_pt_hi_eta_denom = 0
 matched_n_pt_lo_d0_num_bdt = 0
 matched_n_pt_lo_d0_num_nn = 0
 matched_n_pt_lo_d0_num_both = 0
 matched_n_pt_lo_d0_denom = 0
+n_pt_lo_d0_denom = 0
 matched_n_pt_md_d0_num_bdt = 0
 matched_n_pt_md_d0_num_nn = 0
 matched_n_pt_md_d0_num_both = 0
 matched_n_pt_md_d0_denom = 0
+n_pt_md_d0_denom = 0
 matched_n_pt_hi_d0_num_bdt = 0
 matched_n_pt_hi_d0_num_nn = 0
 matched_n_pt_hi_d0_num_both = 0
 matched_n_pt_hi_d0_denom = 0
+n_pt_hi_d0_denom = 0
 
 matched_n_invpt_num_bdt = 0
 matched_n_invpt_num_nn = 0
 matched_n_invpt_num_both = 0
 matched_n_invpt_denom = 0
+n_invpt_denom = 0
 
 matched_n_eta_num_bdt = 0
 matched_n_eta_num_nn = 0
 matched_n_eta_num_both = 0
 matched_n_eta_denom = 0
+n_eta_denom = 0
+matched_n_fine_eta_num_bdt = 0
+matched_n_fine_eta_num_nn = 0
+matched_n_fine_eta_num_both = 0
+matched_n_fine_eta_denom = 0
+n_fine_eta_denom = 0
 
 matched_n_d0_num_bdt = 0
 matched_n_d0_num_nn = 0
 matched_n_d0_num_both = 0
 matched_n_d0_denom = 0
+n_d0_denom = 0
 matched_n_d0_lo_eta_num_bdt = 0
 matched_n_d0_lo_eta_num_nn = 0
 matched_n_d0_lo_eta_num_both = 0
 matched_n_d0_lo_eta_denom = 0
+n_d0_lo_eta_denom = 0
 matched_n_d0_md_eta_num_bdt = 0
 matched_n_d0_md_eta_num_nn = 0
 matched_n_d0_md_eta_num_both = 0
 matched_n_d0_md_eta_denom = 0
+n_d0_md_eta_denom = 0
 matched_n_d0_hi_eta_num_bdt = 0
 matched_n_d0_hi_eta_num_nn = 0
 matched_n_d0_hi_eta_num_both = 0
 matched_n_d0_hi_eta_denom = 0
+n_d0_hi_eta_denom = 0
 
 gen_pt_array = np.array(())
 bdt_pt_array = np.array(())
 nn_pt_array  = np.array(())
 gen_d0_array = np.array(())
 nn_d0_array  = np.array(())
+matched_array  = np.array(())
+eta_array  = np.array(()) 
 
 gen_invpt_array = np.array(())
 bdt_invpt_array = np.array(())
@@ -156,6 +178,7 @@ for eta in etabins[::-1]:
     etabins.append(-eta)
 etabins = np.array((etabins))
 ic(etabins)
+fine_etabins = np.linspace(-2.5,2.5,50)
 
 for filename in filelist:
     print("Loading file")
@@ -189,8 +212,6 @@ for filename in filelist:
         matched_gen_d0      = ak.flatten(table['matched_gen_d0'])
         matched_gen_dR      = ak.flatten(table['matched_gen_dR'])
         matched_gen_vz      = ak.flatten(table['matched_gen_vz'])
-        # ic(np.sum(matched_gen_eta) > 0)
-        # sys.exit()
 
         BDT_pt = ak.flatten(table['emtfTrack_pt'])
         NN_pt  = ak.flatten(table['emtfTrack_pt_dxy'])
@@ -200,23 +221,25 @@ for filename in filelist:
         matched_gen_dR = gen_dR[gen_dR > -1]
         gen_dR_mask = (matched_gen_dR < 0.6)
         emtf_dR_mask = matched_dR < 5
+        match_mask = (emtf_dR_mask & gen_dR_mask)
 
-        gen_pt_array = np.append(gen_pt_array, ak.to_numpy(matched_gen_pt[emtf_dR_mask]))
-        bdt_pt_array = np.append(bdt_pt_array, ak.to_numpy(BDT_pt[emtf_dR_mask]))
-        nn_pt_array  = np.append(nn_pt_array, ak.to_numpy(NN_pt[emtf_dR_mask]))
-        gen_d0_array = np.append(gen_d0_array, ak.to_numpy(matched_gen_d0[emtf_dR_mask]))
-        nn_d0_array  = np.append(nn_d0_array, ak.to_numpy(NN_d0[emtf_dR_mask]))
+        matched_array = np.append(matched_array, ak.to_numpy(match_mask))
+        gen_pt_array = np.append(gen_pt_array, ak.to_numpy(matched_gen_pt))
+        bdt_pt_array = np.append(bdt_pt_array, ak.to_numpy(BDT_pt))
+        nn_pt_array  = np.append(nn_pt_array, ak.to_numpy(NN_pt))
+        gen_d0_array = np.append(gen_d0_array, ak.to_numpy(matched_gen_d0))
+        nn_d0_array  = np.append(nn_d0_array, ak.to_numpy(NN_d0))
 
         temp_invpt     = matched_gen_q/matched_gen_pt
         temp_invpt_bdt = matched_gen_q/BDT_pt
         temp_invpt_nn  = matched_gen_q/NN_pt
-        gen_invpt_array = np.append(gen_invpt_array, ak.to_numpy(temp_invpt[emtf_dR_mask]))
-        bdt_invpt_array = np.append(bdt_invpt_array, ak.to_numpy(temp_invpt_bdt[emtf_dR_mask]))
-        nn_invpt_array  = np.append(nn_invpt_array, ak.to_numpy(temp_invpt_nn[emtf_dR_mask]))
+        gen_invpt_array = np.append(gen_invpt_array, ak.to_numpy(temp_invpt))
+        bdt_invpt_array = np.append(bdt_invpt_array, ak.to_numpy(temp_invpt_bdt))
+        nn_invpt_array  = np.append(nn_invpt_array, ak.to_numpy(temp_invpt_nn))
+        eta_array = np.append(eta_array, ak.to_numpy(matched_gen_etaStar))
 
         denom_mask = (abs(gen_vz) < 100) & (abs(gen_d0) < 100)
         num_mask = (abs(matched_gen_vz) < 100) & (abs(matched_gen_d0) < 100) 
-        match_mask = (emtf_dR_mask & gen_dR_mask)
 
         denom_eta_mask    = (abs(gen_etaStar) > 1.2) & (abs(gen_etaStar) < 2.5)
         denom_lo_eta_mask = (abs(gen_etaStar) > 1.2) & (abs(gen_etaStar) < 1.6)
@@ -293,18 +316,18 @@ for filename in filelist:
         matched_n_pt_hi_eta_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_eta_nn_mask)
         matched_n_pt_hi_eta_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_eta_both_mask)
         matched_n_pt_hi_eta_denom    += get_n(gen_pt, ptbins, den_pt_hi_eta_mask)
-        matched_n_pt_lo_d0_num_bdt  += get_n(matched_gen_d0, d0bins, matched_num_pt_lo_d0_bdt_mask)
-        matched_n_pt_lo_d0_num_nn   += get_n(matched_gen_d0, d0bins, matched_num_pt_lo_d0_nn_mask)
-        matched_n_pt_lo_d0_num_both += get_n(matched_gen_d0, d0bins, matched_num_pt_lo_d0_both_mask)
-        matched_n_pt_lo_d0_denom    += get_n(gen_d0, d0bins, den_pt_lo_d0_mask)
-        matched_n_pt_md_d0_num_bdt  += get_n(matched_gen_d0, d0bins, matched_num_pt_md_d0_bdt_mask)
-        matched_n_pt_md_d0_num_nn   += get_n(matched_gen_d0, d0bins, matched_num_pt_md_d0_nn_mask)
-        matched_n_pt_md_d0_num_both += get_n(matched_gen_d0, d0bins, matched_num_pt_md_d0_both_mask)
-        matched_n_pt_md_d0_denom    += get_n(gen_d0, d0bins, den_pt_md_d0_mask)
-        matched_n_pt_hi_d0_num_bdt  += get_n(matched_gen_d0, d0bins, matched_num_pt_hi_d0_bdt_mask)
-        matched_n_pt_hi_d0_num_nn   += get_n(matched_gen_d0, d0bins, matched_num_pt_hi_d0_nn_mask)
-        matched_n_pt_hi_d0_num_both += get_n(matched_gen_d0, d0bins, matched_num_pt_hi_d0_both_mask)
-        matched_n_pt_hi_d0_denom    += get_n(gen_d0, d0bins, den_pt_hi_d0_mask)
+        matched_n_pt_lo_d0_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_d0_bdt_mask)
+        matched_n_pt_lo_d0_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_d0_nn_mask)
+        matched_n_pt_lo_d0_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_lo_d0_both_mask)
+        matched_n_pt_lo_d0_denom    += get_n(gen_pt, ptbins, den_pt_lo_d0_mask)
+        matched_n_pt_md_d0_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_md_d0_bdt_mask)
+        matched_n_pt_md_d0_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_md_d0_nn_mask)
+        matched_n_pt_md_d0_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_md_d0_both_mask)
+        matched_n_pt_md_d0_denom    += get_n(gen_pt, ptbins, den_pt_md_d0_mask)
+        matched_n_pt_hi_d0_num_bdt  += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_d0_bdt_mask)
+        matched_n_pt_hi_d0_num_nn   += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_d0_nn_mask)
+        matched_n_pt_hi_d0_num_both += get_n(matched_gen_pt, ptbins, matched_num_pt_hi_d0_both_mask)
+        matched_n_pt_hi_d0_denom    += get_n(gen_pt, ptbins, den_pt_hi_d0_mask)
 
 
         ##############################################################################
@@ -335,6 +358,10 @@ for filename in filelist:
         matched_n_eta_num_both += get_n(matched_gen_etaStar, etabins, matched_num_eta_both_mask)
         matched_n_eta_denom    += get_n(gen_etaStar, etabins, den_eta_mask)
 
+        matched_n_fine_eta_num_bdt  += get_n(matched_gen_etaStar, fine_etabins, matched_num_eta_bdt_mask)
+        matched_n_fine_eta_num_nn   += get_n(matched_gen_etaStar, fine_etabins, matched_num_eta_nn_mask)
+        matched_n_fine_eta_num_both += get_n(matched_gen_etaStar, fine_etabins, matched_num_eta_both_mask)
+        matched_n_fine_eta_denom    += get_n(gen_etaStar, fine_etabins, den_eta_mask)
 
         ##############################################################################
         ## d0 efficiency
@@ -392,6 +419,7 @@ plot_eff(matched_n_invpt_num_bdt, matched_n_invpt_num_nn, matched_n_invpt_num_bo
 ## eta plotting
 matched_n_eta_num_bdt[3], matched_n_eta_num_nn[3], matched_n_eta_num_both[3], matched_n_eta_denom[3] = 0, 0, 0, 0
 plot_eff(matched_n_eta_num_bdt, matched_n_eta_num_nn, matched_n_eta_num_both, matched_n_eta_denom, etabins, r'eta efficiency, all eta', r'$\eta^{*\mathrm{gen}}$')
+plot_eff(matched_n_fine_eta_num_bdt, matched_n_fine_eta_num_nn, matched_n_fine_eta_num_both, matched_n_fine_eta_denom, fine_etabins, r'eta efficiency, fine eta', r'$\eta^{*\mathrm{gen}}$')
 
 ## d0 plotting
 plot_eff(matched_n_d0_num_bdt, matched_n_d0_num_nn, matched_n_d0_num_both, matched_n_d0_denom, d0bins, r'd0 efficiency, all eta', r'$d_0^\mathrm{gen}$')
@@ -405,6 +433,6 @@ assert len(gen_pt_array) == len(nn_pt_array),  ic(len(gen_pt_array), len(nn_pt_a
 assert len(gen_d0_array) == len(nn_d0_array),  ic(len(gen_d0_array), len(nn_d0_array))
 
 npz_filename = f"dm_pt_v{version}.npz"
-np.savez(npz_filename, gen_pt=gen_pt_array, bdt_pt=bdt_pt_array, nn_pt=nn_pt_array, gen_invpt=gen_invpt_array, bdt_invpt=bdt_invpt_array, nn_invpt=nn_invpt_array, gen_d0=gen_d0_array, nn_d0=nn_d0_array)
+np.savez(npz_filename, gen_pt=gen_pt_array, bdt_pt=bdt_pt_array, nn_pt=nn_pt_array, gen_invpt=gen_invpt_array, bdt_invpt=bdt_invpt_array, nn_invpt=nn_invpt_array, gen_d0=gen_d0_array, nn_d0=nn_d0_array, match_mask=matched_array, gen_eta=eta_array)
 
 print(f"File saved to {npz_filename}")
