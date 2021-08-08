@@ -90,7 +90,7 @@ int skim_dm_root(){
   TTreeReaderArray<float  > genPartVy(reader,"genPart_vy");
   TTreeReaderArray<float  > genPartVz(reader,"genPart_vz");
 
-  std::vector<float> emtfTrack_pt, emtfTrack_pt_dxy, emtfTrack_dxy, emtfTrack_phi, emtfTrack_eta, emtfTrack_dR, gen_pt, gen_d0, gen_vz, gen_eta, gen_phi, gen_etaStar, gen_phiStar, gen_dR, matched_gen_pt, matched_gen_d0, matched_gen_vz, matched_gen_eta, matched_gen_phi, matched_gen_etaStar, matched_gen_phiStar, matched_gen_dR;
+  std::vector<float> emtfTrack_pt, emtfTrack_pt_dxy, emtfTrack_dxy, emtfTrack_phi, emtfTrack_eta, emtfTrack_dR, gen_pt, gen_d0, gen_vz, gen_eta, gen_phi, gen_etaStar, gen_phiStar, gen_dR, gen_emtf_dR, matched_gen_pt, matched_gen_d0, matched_gen_vz, matched_gen_eta, matched_gen_phi, matched_gen_etaStar, matched_gen_phiStar, matched_gen_dR, matched_gen_emtf_dR;
 
   std::vector<int>   gen_q, matched_gen_q;
 
@@ -110,6 +110,7 @@ int skim_dm_root(){
   t1->Branch("gen_etaStar",&gen_etaStar);
   t1->Branch("gen_phiStar",&gen_phiStar);
   t1->Branch("gen_dR",&gen_dR);
+  t1->Branch("gen_emtf_dR",&gen_emtf_dR);
 
   t1->Branch("matched_gen_q",&matched_gen_q);
   t1->Branch("matched_gen_pt",&matched_gen_pt);
@@ -120,6 +121,7 @@ int skim_dm_root(){
   t1->Branch("matched_gen_etaStar",&matched_gen_etaStar);
   t1->Branch("matched_gen_phiStar",&matched_gen_phiStar);
   t1->Branch("matched_gen_dR",&matched_gen_dR);
+  t1->Branch("matched_gen_emtf_dR",&matched_gen_emtf_dR);
 
   int matchedMu = 0;
   float z_ME2 = 808.0; // ME2 z coordinate in [cm]
@@ -150,6 +152,7 @@ int skim_dm_root(){
     gen_phiStar.clear();
     gen_d0.clear();
     gen_dR.clear();
+    gen_emtf_dR.clear();
     gen_q.clear();
     gen_vz.clear();
 
@@ -160,6 +163,7 @@ int skim_dm_root(){
     matched_gen_phiStar.clear();
     matched_gen_d0.clear();
     matched_gen_dR.clear();
+    matched_gen_emtf_dR.clear();
     matched_gen_q.clear();
     matched_gen_vz.clear();
 
@@ -222,12 +226,14 @@ int skim_dm_root(){
 
     if (*emtfTrackSize < 1) {
       gen_dR.push_back(-1);
+      gen_emtf_dR.push_back(-1);
       t1->Fill();
       continue;
     }
 
     if (*gmtMuonSize < 1) {
       gen_dR.push_back(-1);
+      gen_emtf_dR.push_back(-1);
       t1->Fill();
       continue;
     }
@@ -252,9 +258,11 @@ int skim_dm_root(){
     matched_gen_phiStar.push_back(phiStar_gen);
     matched_gen_d0.push_back(d0);
     matched_gen_dR.push_back(dR_gmt_gen);
+    matched_gen_emtf_dR.push_back(dR_gmt_emtf);
     matched_gen_q.push_back(genPartCharge[i]);
 
     gen_dR.push_back(dR_gmt_gen);
+    gen_emtf_dR.push_back(dR_gmt_emtf);
 
     emtfTrack_pt.push_back(emtfTrackPt[i]);
     emtfTrack_pt_dxy.push_back(emtfTrackPtDxy[i]);
